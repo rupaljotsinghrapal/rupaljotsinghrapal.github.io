@@ -1,0 +1,20 @@
+<html>
+<head>
+  <script type="text/javascript"
+      src="//www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js">
+  </script>
+</head>
+<body style="color: white">
+  <div>Hello World</div>
+  <div id="message"></div>
+  <script>
+    const context = cast.framework.CastReceiverContext.getInstance();
+    context.addCustomMessageListener('urn:x-cast:ch.cimnine.cromecast-test.text', function (customEvent) {
+      if (customEvent.data.type == "message") {
+        document.getElementById("message").innerHTML = customEvent.data.text;
+      }
+    });
+    context.start();
+  </script>
+</body>
+</html>
