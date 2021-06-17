@@ -17,7 +17,7 @@ const LOG_TAG = 'MyAPP.LOG';
 castDebugLogger.setEnabled(true);
 
 // Show debug overlay
-// castDebugLogger.showDebugLogs(true);
+castDebugLogger.showDebugLogs(true);
 
 // Set verbosity level for Core events.
 castDebugLogger.loggerLevelByEvents = {
