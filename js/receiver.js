@@ -59,6 +59,9 @@ playerManager.setMessageInterceptor(
   cast.framework.messages.MessageType.LOAD,
   request => {
     castDebugLogger.info(LOG_TAG, 'Intercepting LOAD request');
+    castDebugLogger.warn(request)
+    castDebugLogger.warn(JSON.stringify(request));
+    castDebugLogger.error("Robby")
 
     // Map contentId to entity
     if (request.media && request.media.entity) {
