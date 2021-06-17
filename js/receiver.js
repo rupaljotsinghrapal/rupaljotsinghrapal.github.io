@@ -27,15 +27,16 @@ castDebugLogger.loggerLevelByEvents = {
 
 // Set verbosity level for custom tags.
 castDebugLogger.loggerLevelByTags = {
-    LOG_TAG: cast.framework.LoggerLevel.DEBUG,
+  LOG_TAG: cast.framework.LoggerLevel.DEBUG,
 };
 
-function makeRequest (method, url) {
+function makeRequest(method, url) {
   return new Promise(function (resolve, reject) {
     let xhr = new XMLHttpRequest();
     xhr.open(method, url);
     xhr.onload = function () {
       if (this.status >= 200 && this.status < 300) {
+        castDebugLogger.info(JSON.parse(xhr.response));
         resolve(JSON.parse(xhr.response));
       } else {
         reject({
@@ -68,9 +69,12 @@ playerManager.setMessageInterceptor(
       // Fetch repository metadata
       makeRequest('GET', SAMPLE_URL)
         .then(function (data) {
+          castDebugLogger.info("Rupaljot initiated 1")
+          castDebugLogger.info(data)
+
           // Obtain resources by contentId from downloaded repository metadata.
           let item = data[request.media.contentId];
-          if(!item) {
+          if (!item) {
             // Content could not be found in repository
             castDebugLogger.error(LOG_TAG, 'Content not found');
             reject();
@@ -79,19 +83,19 @@ playerManager.setMessageInterceptor(
             request.media.contentType = TEST_STREAM_TYPE;
 
             // Configure player to parse DASH content
-            if(TEST_STREAM_TYPE == StreamType.DASH) {
+            if (TEST_STREAM_TYPE == StreamType.DASH) {
               request.media.contentUrl = item.stream.dash;
             }
 
             // Configure player to parse HLS content
-            else if(TEST_STREAM_TYPE == StreamType.HLS) {
+            else if (TEST_STREAM_TYPE == StreamType.HLS) {
               request.media.contentUrl = item.stream.hls
               request.media.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.FMP4;
               request.media.hlsVideoSegmentFormat = cast.framework.messages.HlsVideoSegmentFormat.FMP4;
             }
-            
+
             castDebugLogger.warn(LOG_TAG, 'Playable URL:', request.media.contentUrl);
-            
+
             // Add metadata
             let metadata = new cast.framework.messages.GenericMediaMetadata();
             metadata.title = item.title;
@@ -102,7 +106,7 @@ playerManager.setMessageInterceptor(
             // Resolve request
             resolve(request);
           }
-      });
+        });
     });
   });
 
@@ -116,17 +120,17 @@ let browseItems = getBrowseItems();
 function getBrowseItems() {
   let browseItems = [];
   makeRequest('GET', SAMPLE_URL)
-  .then(function (data) {
-    for (let key in data) {
-      let item = new cast.framework.ui.BrowseItem();
-      item.entity = key;
-      item.title = data[key].title;
-      item.subtitle = data[key].description;
-      item.image = new cast.framework.messages.Image(data[key].poster);
-      item.imageType = cast.framework.ui.BrowseImageType.MOVIE;
-      browseItems.push(item);
-    }
-  });
+    .then(function (data) {
+      for (let key in data) {
+        let item = new cast.framework.ui.BrowseItem();
+        item.entity = key;
+        item.title = data[key].title;
+        item.subtitle = data[key].description;
+        item.image = new cast.framework.messages.Image(data[key].poster);
+        item.imageType = cast.framework.ui.BrowseImageType.MOVIE;
+        browseItems.push(item);
+      }
+    });
   return browseItems;
 }
 
