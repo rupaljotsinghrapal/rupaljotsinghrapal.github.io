@@ -70,7 +70,7 @@ playerManager.setMessageInterceptor(
       makeRequest('GET', SAMPLE_URL)
         .then(function (data) {
           castDebugLogger.info("Rupaljot initiated 1")
-          castDebugLogger.info(data)
+          castDebugLogger.warn(JSON.stringify(data))
 
           // Obtain resources by contentId from downloaded repository metadata.
           let item = data[request.media.contentId];
