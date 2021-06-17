@@ -21,7 +21,7 @@ body {
 cast-media-player {
   --theme-hue: 100;
   --progress-color: rgb(0, 255, 0);
-  --splash-image: url('http://some/image.png');
+  --splash-image: url('res/earth.png');
   --splash-size: cover;
 }
 
