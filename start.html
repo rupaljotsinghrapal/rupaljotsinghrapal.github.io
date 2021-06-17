@@ -24,12 +24,12 @@
     sendText(textEl.value);
   }
 
-  function sendText("rupal") {
+  function sendText(txt) {
     var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
     if (castSession) {
       castSession.sendMessage('urn:x-cast:ch.cimnine.cromecast-test.text', {
         type: "message",
-        text: txt
+        text: "rupal"
       });
     }
   }
