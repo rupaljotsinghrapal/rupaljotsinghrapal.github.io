@@ -19,14 +19,12 @@ body {
 }
 
 cast-media-player {
-  --theme-hue: 180;
-  --progress-color: rgb(0, 255, 255);
-  --splash-image: url('res/earth.png');
+  --theme-hue: 100;
+  --progress-color: rgb(0, 255, 0);
+  --splash-image: url('http://some/image.png');
   --splash-size: cover;
-  --slideshow-interval: 8;
-  --slideshow-animation: 3;
-  --slideshow-image-1: url('res/earth.png');
 }
+
 
 /* ------------------------------------------------- */
 /* Sample Overlay Text                               */
