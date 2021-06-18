@@ -255,7 +255,7 @@ controls.assignButton(
 );
 
 castDebugLogger.warn("Rupal")
-castDebugLogger.warn(cast.framework.messages.Command);
+castDebugLogger.warn(JSON.stringify(cast.framework.messages.Command));
 castDebugLogger.warn(cast.framework.messages.Command.ALL_BASIC_MEDIA |
   cast.framework.messages.Command.QUEUE_PREV |
   cast.framework.messages.Command.QUEUE_NEXT |
