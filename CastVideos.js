@@ -650,6 +650,8 @@ CastPlayer.prototype.setupRemotePlayer = function () {
       'url': MEDIA_SOURCE_ROOT + this.mediaContents[mediaIndex]['thumb']
     }];
 
+    mediaInfo.contentId = "bbb";
+
     console.log(mediaInfo)
 
     let request = new chrome.cast.media.LoadRequest(mediaInfo);
