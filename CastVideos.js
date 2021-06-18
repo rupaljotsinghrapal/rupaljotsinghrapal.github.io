@@ -1656,11 +1656,12 @@ window['__onGCastApiAvailable'] = function (isAvailable) {
 function test() {
   console.log("key pressed");
   setTimeout(() => {
+    console.log("initiated")
     let castSession = cast.framework.CastContext.getInstance().getCurrentSession();
     castSession.sendMessage('urn:x-cast:com.google.cast.media', {
       type: 'SKIP_AD',
       requestId: 1,
       mediaSessionId: 1009
     });
-  }, 10000);
+  }, 20000);
 }
