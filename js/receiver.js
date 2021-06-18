@@ -243,40 +243,24 @@ castDebugLogger.info(LOG_RECEIVER_TAG,
  * Set the control buttons in the UI controls.
  */
 const controls = cast.framework.ui.Controls.getInstance();
+controls.clearDefaultSlotAssignments();
+controls.assignButton(
+  cast.framework.ui.ControlsSlot.SLOT_SECONDARY_1,
+  cast.framework.ui.ControlsButton.QUEUE_PREV
+);
+controls.assignButton(
+  cast.framework.ui.ControlsSlot.SLOT_PRIMARY_1,
+  cast.framework.ui.ControlsButton.CAPTIONS
+);
+controls.assignButton(
+  cast.framework.ui.ControlsSlot.SLOT_PRIMARY_2,
+  cast.framework.ui.ControlsButton.SEEK_FORWARD_15
+);
+controls.assignButton(
+  cast.framework.ui.ControlsSlot.SLOT_SECONDARY_2,
+  cast.framework.ui.ControlsButton.QUEUE_NEXT
+);
 
-
-// Optimizing for smart displays 
-// const touchControls = cast.framework.ui.Controls.getInstance();
-const playerData = new cast.framework.ui.PlayerData();
-const playerDataBinder = new cast.framework.ui.PlayerDataBinder(playerData);
-
-playerDataBinder.addEventListener(
-  cast.framework.ui.PlayerDataEventType.MEDIA_CHANGED,
-  (e) => {
-    if (!e.value) return;
-    controls.clearDefaultSlotAssignments();
-
-    /**
-     * Assign buttons to control slots.
-     */
-    controls.assignButton(
-      cast.framework.ui.ControlsSlot.SLOT_SECONDARY_1,
-      cast.framework.ui.ControlsButton.QUEUE_PREV
-    );
-    controls.assignButton(
-      cast.framework.ui.ControlsSlot.SLOT_PRIMARY_1,
-      cast.framework.ui.ControlsButton.CAPTIONS
-    );
-    controls.assignButton(
-      cast.framework.ui.ControlsSlot.SLOT_PRIMARY_2,
-      cast.framework.ui.ControlsButton.SEEK_FORWARD_15
-    );
-    controls.assignButton(
-      cast.framework.ui.ControlsSlot.SLOT_SECONDARY_2,
-      cast.framework.ui.ControlsButton.QUEUE_NEXT
-    );
-
-  });
 
 castDebugLogger.warn("Rupal")
 castDebugLogger.warn(JSON.stringify(cast.framework.messages.Command));
