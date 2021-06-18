@@ -264,8 +264,5 @@ castDebugLogger.warn(cast.framework.messages.Command.ALL_BASIC_MEDIA |
 context.start({
   queue: new CastQueue(),
   playbackConfig: playbackConfig,
-  supportedCommands: cast.framework.messages.Command.ALL_BASIC_MEDIA |
-                      cast.framework.messages.Command.QUEUE_PREV |
-                      cast.framework.messages.Command.QUEUE_NEXT |
-                      cast.framework.messages.Command.STREAM_TRANSFER
+  supportedCommands: cast.framework.messages.Command.ALL_BASIC_MEDIA
 });
