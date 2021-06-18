@@ -246,7 +246,7 @@ const controls = cast.framework.ui.Controls.getInstance();
 
 
 // Optimizing for smart displays 
-const touchControls = cast.framework.ui.Controls.getInstance();
+// const touchControls = cast.framework.ui.Controls.getInstance();
 const playerData = new cast.framework.ui.PlayerData();
 const playerDataBinder = new cast.framework.ui.PlayerDataBinder(playerData);
 
