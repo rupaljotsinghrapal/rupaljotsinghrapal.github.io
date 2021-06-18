@@ -1658,11 +1658,11 @@ function test() {
   setTimeout(() => {
     console.log("initiated")
     let castSession = cast.framework.CastContext.getInstance().getCurrentSession();
-    castSession.sendMessage('urn:x-cast:com.google.cast.mediaTesting', JSON.stringify({
+    castSession.sendMessage('urn:x-cast:com.google.cast.mediaTesting', {
       type: 'SKIP_AD',
       requestId: 1,
       mediaSessionId: 1009
-    }));
+    });
     console.log(castSession);
   }, 20000);
 }
