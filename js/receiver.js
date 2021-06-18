@@ -87,7 +87,7 @@ playerManager.addEventListener(
         'LOAD_FAILED: Verify the load request is set up ' +
         'properly and the media is able to play.');
     }
-  });
+});
 
 /**
  * Example analytics tracking implementation. See cast_analytics.js. Must
@@ -107,25 +107,25 @@ const contentTracker = new ContentTracker();
  */
 function addBreaks(mediaInformation) {
   return fetchMediaByEntity('https://sample.com/ads/fbb_ad')
-    .then((clip1) => {
-      mediaInformation.breakClips = [
-        {
-          id: 'fbb_ad',
-          title: clip1.title,
-          contentUrl: clip1.stream.dash,
-          contentType: 'application/dash+xml',
-          whenSkippable: 5
-        }
-      ];
+  .then((clip1) => {
+    mediaInformation.breakClips = [
+      {
+        id: 'fbb_ad',
+        title: clip1.title,
+        contentUrl: clip1.stream.dash,
+        contentType: 'application/dash+xml',
+        whenSkippable: 5
+      }
+    ];
 
-      mediaInformation.breaks = [
-        {
-          id: 'pre-roll',
-          breakClipIds: ['fbb_ad'],
-          position: 0
-        }
-      ];
-    });
+    mediaInformation.breaks = [
+      {
+        id: 'pre-roll',
+        breakClipIds: ['fbb_ad'],
+        position: 0
+      }
+    ];
+  });
 }
 
 /**
@@ -143,20 +143,20 @@ function fetchMediaByEntity(entity) {
 
   return new Promise((accept, reject) => {
     fetch(CONTENT_URL)
-      .then((response) => response.json())
-      .then((obj) => {
-        if (obj) {
-          if (obj[key]) {
-            accept(obj[key]);
-          }
-          else {
-            reject(`${key} not found in repository`);
-          }
+    .then((response) => response.json())
+    .then((obj) => {
+      if (obj) {
+        if (obj[key]) {
+          accept(obj[key]);
         }
         else {
-          reject('content repository not found');
+          reject(`${key} not found in repository`);
         }
-      });
+      }
+      else {
+        reject('content repository not found');
+      }
+    });
   });
 }
 
@@ -180,39 +180,39 @@ playerManager.setMessageInterceptor(
         'Playable URL is missing. Using ContentId as a fallback.');
     }
     if (!loadRequestData.media.contentId) {
-      castDebugLogger.warn(LOG_RECEIVER_TAG,
-        'Missing Content ID and Playable URL. Using entity as a fallback');
+        castDebugLogger.warn(LOG_RECEIVER_TAG,
+          'Missing Content ID and Playable URL. Using entity as a fallback');
     }
 
     if (!loadRequestData.media.entity && loadRequestData.media.contentId) {
       loadRequestData.media.entity = loadRequestData.media.contentId;
       castDebugLogger.info(LOG_RECEIVER_TAG,
-        'Setting entity to contentId');
+          'Setting entity to contentId');
     }
     if (loadRequestData.media.entity) {
       castDebugLogger.info(LOG_RECEIVER_TAG,
-        `Loading entity ${loadRequestData.media.entity} from API`);
+          `Loading entity ${loadRequestData.media.entity} from API`);
       return new Promise((accept, reject) => {
         addBreaks(loadRequestData.media)
-          .then(() => fetchMediaByEntity(loadRequestData.media.entity))
-          .then((item) => {
-            if (!item) {
-              reject();
-            }
+        .then(() => fetchMediaByEntity(loadRequestData.media.entity))
+        .then((item) => {
+          if (!item) {
+            reject();
+          }
 
-            let metadata = new cast.framework.messages.GenericMediaMetadata();
-            metadata.title = item.title;
-            metadata.subtitle = item.description;
-            loadRequestData.media.contentId = item.stream.dash;
-            loadRequestData.media.contentType = 'application/dash+xml';
-            loadRequestData.media.metadata = metadata;
-            accept(loadRequestData);
-          })
+          let metadata = new cast.framework.messages.GenericMediaMetadata();
+          metadata.title = item.title;
+          metadata.subtitle = item.description;
+          loadRequestData.media.contentId = item.stream.dash;
+          loadRequestData.media.contentType = 'application/dash+xml';
+          loadRequestData.media.metadata = metadata;
+          accept(loadRequestData);
+        })
       });
     }
     else {
       castDebugLogger.error(LOG_RECEIVER_TAG,
-        "Request missing valid target: no contentUrl, contentId, or entity");
+          "Request missing valid target: no contentUrl, contentId, or entity");
     }
 
     return loadRequestData;
@@ -227,7 +227,6 @@ const playbackConfig = new cast.framework.PlaybackConfig();
 playbackConfig.autoResumeDuration = 5;
 castDebugLogger.info(LOG_RECEIVER_TAG,
   `autoResumeDuration set to: ${playbackConfig.autoResumeDuration}`);
-  castDebugLogger.info(cast.framework.system.MessageType.JSON);
 
 /**
  * Set the control buttons in the UI controls.
@@ -255,25 +254,25 @@ controls.assignButton(
   cast.framework.ui.ControlsButton.QUEUE_NEXT
 );
 
-const CHANNEL = 'urn:x-cast:com.google.cast.mediaTesting';
-const options = new cast.framework.CastReceiverOptions();
-options.customNamespaces = Object.assign({});
 
-
-options.customNamespaces[CHANNEL] = cast.framework.system.MessageType.JSON;
-
-ctx.addCustomMessageListener(CHANNEL, customEvent => {
+const CUSTOM_CHANNEL = 'urn:x-cast:com.google.cast.media';
+context.addCustomMessageListener(CUSTOM_CHANNEL, function(customEvent) {
+  // handle customEvent.
   castDebugLogger.error(customEvent);
   castDebugLogger.warn("Rupal initiated this")
   castDebugLogger.error(customEvent);
   castDebugLogger.error(customEvent);
   castDebugLogger.error(customEvent);
   castDebugLogger.error(customEvent);
-  castDebugLogger.error(customEvent);
+
 });
 
 
-
-
-
-context.start(options);
+context.start({
+  queue: new CastQueue(),
+  playbackConfig: playbackConfig,
+  supportedCommands: cast.framework.messages.Command.ALL_BASIC_MEDIA |
+                      cast.framework.messages.Command.QUEUE_PREV |
+                      cast.framework.messages.Command.QUEUE_NEXT |
+                      cast.framework.messages.Command.STREAM_TRANSFER
+});
