@@ -47,12 +47,12 @@ const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
  * Uncomment below line to enable debug logger and show a 'DEBUG MODE' tag at
  * top left corner.
  */
-castDebugLogger.setEnabled(true);
+// castDebugLogger.setEnabled(true);
 
 /**
  * Uncomment below line to show debug overlay.
  */
-castDebugLogger.showDebugLogs(true);
+// castDebugLogger.showDebugLogs(true);
 
 /**
  * Set verbosity level for Core events.
@@ -87,7 +87,7 @@ playerManager.addEventListener(
         'LOAD_FAILED: Verify the load request is set up ' +
         'properly and the media is able to play.');
     }
-  });
+});
 
 /**
  * Example analytics tracking implementation. See cast_analytics.js. Must
@@ -107,25 +107,25 @@ const contentTracker = new ContentTracker();
  */
 function addBreaks(mediaInformation) {
   return fetchMediaByEntity('https://sample.com/ads/fbb_ad')
-    .then((clip1) => {
-      mediaInformation.breakClips = [
-        {
-          id: 'fbb_ad',
-          title: clip1.title,
-          contentUrl: clip1.stream.dash,
-          contentType: 'application/dash+xml',
-          whenSkippable: 5
-        }
-      ];
+  .then((clip1) => {
+    mediaInformation.breakClips = [
+      {
+        id: 'fbb_ad',
+        title: clip1.title,
+        contentUrl: clip1.stream.dash,
+        contentType: 'application/dash+xml',
+        whenSkippable: 5
+      }
+    ];
 
-      mediaInformation.breaks = [
-        {
-          id: 'pre-roll',
-          breakClipIds: ['fbb_ad'],
-          position: 0
-        }
-      ];
-    });
+    mediaInformation.breaks = [
+      {
+        id: 'pre-roll',
+        breakClipIds: ['fbb_ad'],
+        position: 0
+      }
+    ];
+  });
 }
 
 /**
@@ -143,20 +143,20 @@ function fetchMediaByEntity(entity) {
 
   return new Promise((accept, reject) => {
     fetch(CONTENT_URL)
-      .then((response) => response.json())
-      .then((obj) => {
-        if (obj) {
-          if (obj[key]) {
-            accept(obj[key]);
-          }
-          else {
-            reject(`${key} not found in repository`);
-          }
+    .then((response) => response.json())
+    .then((obj) => {
+      if (obj) {
+        if (obj[key]) {
+          accept(obj[key]);
         }
         else {
-          reject('content repository not found');
+          reject(`${key} not found in repository`);
         }
-      });
+      }
+      else {
+        reject('content repository not found');
+      }
+    });
   });
 }
 
@@ -180,55 +180,43 @@ playerManager.setMessageInterceptor(
         'Playable URL is missing. Using ContentId as a fallback.');
     }
     if (!loadRequestData.media.contentId) {
-      castDebugLogger.warn(LOG_RECEIVER_TAG,
-        'Missing Content ID and Playable URL. Using entity as a fallback');
+        castDebugLogger.warn(LOG_RECEIVER_TAG,
+          'Missing Content ID and Playable URL. Using entity as a fallback');
     }
 
     if (!loadRequestData.media.entity && loadRequestData.media.contentId) {
       loadRequestData.media.entity = loadRequestData.media.contentId;
       castDebugLogger.info(LOG_RECEIVER_TAG,
-        'Setting entity to contentId');
+          'Setting entity to contentId');
     }
     if (loadRequestData.media.entity) {
       castDebugLogger.info(LOG_RECEIVER_TAG,
-        `Loading entity ${loadRequestData.media.entity} from API`);
+          `Loading entity ${loadRequestData.media.entity} from API`);
       return new Promise((accept, reject) => {
         addBreaks(loadRequestData.media)
-          .then(() => fetchMediaByEntity(loadRequestData.media.entity))
-          .then((item) => {
-            if (!item) {
-              reject();
-            }
+        .then(() => fetchMediaByEntity(loadRequestData.media.entity))
+        .then((item) => {
+          if (!item) {
+            reject();
+          }
 
-            let metadata = new cast.framework.messages.GenericMediaMetadata();
-            metadata.title = item.title;
-            metadata.subtitle = item.description;
-            loadRequestData.media.contentId = item.stream.dash;
-            loadRequestData.media.contentType = 'application/dash+xml';
-            loadRequestData.media.metadata = metadata;
-            accept(loadRequestData);
-          })
+          let metadata = new cast.framework.messages.GenericMediaMetadata();
+          metadata.title = item.title;
+          metadata.subtitle = item.description;
+          loadRequestData.media.contentId = item.stream.dash;
+          loadRequestData.media.contentType = 'application/dash+xml';
+          loadRequestData.media.metadata = metadata;
+          accept(loadRequestData);
+        })
       });
     }
     else {
       castDebugLogger.error(LOG_RECEIVER_TAG,
-        "Request missing valid target: no contentUrl, contentId, or entity");
+          "Request missing valid target: no contentUrl, contentId, or entity");
     }
 
     return loadRequestData;
   });
-
-
-function sendMessage(msg) {
-  var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
-  if (castSession) {
-    castSession.sendMessage('urn:x-cast:com.example.castdata', {
-      type: "message",
-      text: "msg"
-    });
-  }
-}
-
 
 const playbackConfig = new cast.framework.PlaybackConfig();
 
@@ -243,32 +231,34 @@ castDebugLogger.info(LOG_RECEIVER_TAG,
 /**
  * Set the control buttons in the UI controls.
  */
-
-
-playerManager.addSupportedMediaCommands(cast.framework.messages.Command.ALL_BASIC_MEDIA |
-  cast.framework.messages.Command.QUEUE_PREV |
-  cast.framework.messages.Command.QUEUE_NEXT, true);
-
-context.start({
-  queue: new CastQueue(),
-  playbackConfig: playbackConfig,
-  enforceSupportedCommands: true,
-  supportedCommands: cast.framework.messages.Command.ALL_BASIC_MEDIA |
-    cast.framework.messages.Command.QUEUE_PREV |
-    cast.framework.messages.Command.QUEUE_NEXT
-});
 const controls = cast.framework.ui.Controls.getInstance();
 controls.clearDefaultSlotAssignments();
 
 /**
  * Assign buttons to control slots.
  */
- controls.assignButton(
+controls.assignButton(
   cast.framework.ui.ControlsSlot.SLOT_SECONDARY_1,
-  cast.framework.ui.ControlsButton.LIKE
-)
-
+  cast.framework.ui.ControlsButton.QUEUE_PREV
+);
+controls.assignButton(
+  cast.framework.ui.ControlsSlot.SLOT_PRIMARY_1,
+  cast.framework.ui.ControlsButton.CAPTIONS
+);
+controls.assignButton(
+  cast.framework.ui.ControlsSlot.SLOT_PRIMARY_2,
+  cast.framework.ui.ControlsButton.SEEK_FORWARD_15
+);
 controls.assignButton(
   cast.framework.ui.ControlsSlot.SLOT_SECONDARY_2,
-  cast.framework.ui.ControlsButton.DISLIKE
-)
+  cast.framework.ui.ControlsButton.QUEUE_NEXT
+);
+
+context.start({
+  queue: new CastQueue(),
+  playbackConfig: playbackConfig,
+  supportedCommands: cast.framework.messages.Command.ALL_BASIC_MEDIA |
+                      cast.framework.messages.Command.QUEUE_PREV |
+                      cast.framework.messages.Command.QUEUE_NEXT |
+                      cast.framework.messages.Command.STREAM_TRANSFER
+});
