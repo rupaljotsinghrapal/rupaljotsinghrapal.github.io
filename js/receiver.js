@@ -271,14 +271,17 @@ castDebugLogger.warn(cast.framework.messages.Command.ALL_BASIC_MEDIA |
   cast.framework.messages.Command.QUEUE_PREV |
   cast.framework.messages.Command.QUEUE_NEXT |
   cast.framework.messages.Command.STREAM_TRANSFER)
-  castDebugLogger.warn("cast.framework.messages.Command.ALL_BASIC_MEDIA",cast.framework.messages.Command.ALL_BASIC_MEDIA)
-  castDebugLogger.warn("cast.framework.messages.Command.QUEUE_PREV",cast.framework.messages.Command.QUEUE_PREV)
-  castDebugLogger.warn("cast.framework.messages.Command.QUEUE_NEXT",cast.framework.messages.Command.QUEUE_NEXT)
-  castDebugLogger.warn("cast.framework.messages.Command.STREAM_TRANSFER",cast.framework.messages.Command.STREAM_TRANSFER)
+castDebugLogger.warn("cast.framework.messages.Command.ALL_BASIC_MEDIA", cast.framework.messages.Command.ALL_BASIC_MEDIA)
+castDebugLogger.warn("cast.framework.messages.Command.QUEUE_PREV", cast.framework.messages.Command.QUEUE_PREV)
+castDebugLogger.warn("cast.framework.messages.Command.QUEUE_NEXT", cast.framework.messages.Command.QUEUE_NEXT)
+castDebugLogger.warn("cast.framework.messages.Command.STREAM_TRANSFER", cast.framework.messages.Command.STREAM_TRANSFER)
 
 
 context.start({
   queue: new CastQueue(),
   playbackConfig: playbackConfig,
-  supportedCommands: cast.framework.messages.Command.ALL_BASIC_MEDIA
+  supportedCommands: cast.framework.messages.Command.ALL_BASIC_MEDIA |
+    cast.framework.messages.Command.QUEUE_PREV |
+    cast.framework.messages.Command.QUEUE_NEXT |
+    cast.framework.messages.Command.STREAM_TRANSFER
 });

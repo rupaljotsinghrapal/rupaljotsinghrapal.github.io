@@ -41,16 +41,7 @@ cast-media-player {
 /* Sample Overlay Text                               */
 /* ------------------------------------------------- */
 cast-media-player:after {
-  content: "SAMPLE";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  bottom: 0;
-  text-align: center;
-  font-size: 200px;
-  font-weight: bold;
-  margin-top: -150px;
-  opacity: 0.5;
-  color: red;
+  --logo-image : url('res/earth.png');
+  --logo-size : 30px 30px;
+  --logo-repeat: no-repeat;
 }
