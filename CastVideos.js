@@ -1663,5 +1663,6 @@ function test() {
       requestId: 1,
       mediaSessionId: 1009
     }));
+    console.log(castSession);
   }, 20000);
 }
