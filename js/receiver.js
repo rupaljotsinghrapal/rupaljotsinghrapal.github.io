@@ -251,11 +251,7 @@ controls.clearDefaultSlotAssignments();
  */
 controls.assignButton(
   cast.framework.ui.ControlsSlot.SLOT_SECONDARY_1,
-  cast.framework.ui.ControlsButton.QUEUE_PREV
-);
-controls.assignButton(
-  cast.framework.ui.ControlsSlot.SLOT_PRIMARY_1,
-  cast.framework.ui.ControlsButton.CAPTIONS
+  cast.framework.ui.ControlsButton.SEEK_BACKWARD_10
 );
 controls.assignButton(
   cast.framework.ui.ControlsSlot.SLOT_PRIMARY_2,
@@ -263,7 +259,7 @@ controls.assignButton(
 );
 controls.assignButton(
   cast.framework.ui.ControlsSlot.SLOT_SECONDARY_2,
-  cast.framework.ui.ControlsButton.QUEUE_NEXT
+  cast.framework.ui.ControlsButton.REPEAT
 );
 
 context.start({
