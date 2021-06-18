@@ -276,12 +276,6 @@ playerDataBinder.addEventListener(
       cast.framework.ui.ControlsButton.QUEUE_NEXT
     );
 
-    // Clear default buttons and re-assign
-    touchControls.clearDefaultSlotAssignments();
-    touchControls.assignButton(
-      cast.framework.ui.ControlsSlot.SLOT_PRIMARY_1,
-      cast.framework.ui.ControlsButton.SEEK_BACKWARD_30
-    );
   });
 
 castDebugLogger.warn("Rupal")
