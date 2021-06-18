@@ -98,7 +98,9 @@ playerManager.setMessageInterceptor(
               
             }
             
-            request.media.mediaStatus = cast.framework.messages.MediaStatus.ALL_BASIC_MEDIA;
+//             request.media.mediaStatus = cast.framework.messages.MediaStatus.ALL_BASIC_MEDIA;
+            castDebugLogger.warn(cast.framework.messages.MediaStatus.ALL_BASIC_MEDIA);
+            castDebugLogger.warn(JSON.stringify(cast.framework.messages.MediaStatus.ALL_BASIC_MEDIA));
 
             castDebugLogger.warn(LOG_TAG, 'Playable URL:', request.media.contentUrl);
 
