@@ -243,34 +243,53 @@ castDebugLogger.info(LOG_RECEIVER_TAG,
  * Set the control buttons in the UI controls.
  */
 const controls = cast.framework.ui.Controls.getInstance();
-controls.clearDefaultSlotAssignments();
 
-/**
- * Assign buttons to control slots.
- */
-controls.assignButton(
-  cast.framework.ui.ControlsSlot.SLOT_SECONDARY_1,
-  cast.framework.ui.ControlsButton.QUEUE_PREV
-);
-controls.assignButton(
-  cast.framework.ui.ControlsSlot.SLOT_PRIMARY_1,
-  cast.framework.ui.ControlsButton.CAPTIONS
-);
-controls.assignButton(
-  cast.framework.ui.ControlsSlot.SLOT_PRIMARY_2,
-  cast.framework.ui.ControlsButton.SEEK_FORWARD_15
-);
-controls.assignButton(
-  cast.framework.ui.ControlsSlot.SLOT_SECONDARY_2,
-  cast.framework.ui.ControlsButton.QUEUE_NEXT
-);
+
+// Optimizing for smart displays 
+const touchControls = cast.framework.ui.Controls.getInstance();
+const playerData = new cast.framework.ui.PlayerData();
+const playerDataBinder = new cast.framework.ui.PlayerDataBinder(playerData);
+
+playerDataBinder.addEventListener(
+  cast.framework.ui.PlayerDataEventType.MEDIA_CHANGED,
+  (e) => {
+    if (!e.value) return;
+    controls.clearDefaultSlotAssignments();
+
+    /**
+     * Assign buttons to control slots.
+     */
+    controls.assignButton(
+      cast.framework.ui.ControlsSlot.SLOT_SECONDARY_1,
+      cast.framework.ui.ControlsButton.QUEUE_PREV
+    );
+    controls.assignButton(
+      cast.framework.ui.ControlsSlot.SLOT_PRIMARY_1,
+      cast.framework.ui.ControlsButton.CAPTIONS
+    );
+    controls.assignButton(
+      cast.framework.ui.ControlsSlot.SLOT_PRIMARY_2,
+      cast.framework.ui.ControlsButton.SEEK_FORWARD_15
+    );
+    controls.assignButton(
+      cast.framework.ui.ControlsSlot.SLOT_SECONDARY_2,
+      cast.framework.ui.ControlsButton.QUEUE_NEXT
+    );
+
+    // Clear default buttons and re-assign
+    touchControls.clearDefaultSlotAssignments();
+    touchControls.assignButton(
+      cast.framework.ui.ControlsSlot.SLOT_PRIMARY_1,
+      cast.framework.ui.ControlsButton.SEEK_BACKWARD_30
+    );
+  });
 
 castDebugLogger.warn("Rupal")
 castDebugLogger.warn(JSON.stringify(cast.framework.messages.Command));
 castDebugLogger.warn(cast.framework.messages.Command.ALL_BASIC_MEDIA |
   cast.framework.messages.Command.QUEUE_PREV |
   cast.framework.messages.Command.QUEUE_NEXT |
-  cast.framework.messages.Command.STREAM_TRANSFER)
+  cast.framework.messages.Command.STREAM_TRANSFER);
 castDebugLogger.warn("cast.framework.messages.Command.ALL_BASIC_MEDIA", cast.framework.messages.Command.ALL_BASIC_MEDIA)
 castDebugLogger.warn("cast.framework.messages.Command.QUEUE_PREV", cast.framework.messages.Command.QUEUE_PREV)
 castDebugLogger.warn("cast.framework.messages.Command.QUEUE_NEXT", cast.framework.messages.Command.QUEUE_NEXT)
@@ -283,5 +302,6 @@ context.start({
   supportedCommands: cast.framework.messages.Command.ALL_BASIC_MEDIA |
     cast.framework.messages.Command.QUEUE_PREV |
     cast.framework.messages.Command.QUEUE_NEXT |
-    cast.framework.messages.Command.STREAM_TRANSFER
+    cast.framework.messages.Command.STREAM_TRANSFER,
+  cont
 });
