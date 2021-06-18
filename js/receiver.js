@@ -244,6 +244,10 @@ castDebugLogger.info(LOG_RECEIVER_TAG,
  */
 const controls = cast.framework.ui.Controls.getInstance();
 controls.clearDefaultSlotAssignments();
+
+/**
+ * Assign buttons to control slots.
+ */
 controls.assignButton(
   cast.framework.ui.ControlsSlot.SLOT_SECONDARY_1,
   cast.framework.ui.ControlsButton.QUEUE_PREV
@@ -260,7 +264,6 @@ controls.assignButton(
   cast.framework.ui.ControlsSlot.SLOT_SECONDARY_2,
   cast.framework.ui.ControlsButton.QUEUE_NEXT
 );
-
 
 castDebugLogger.warn("Rupal")
 castDebugLogger.warn(JSON.stringify(cast.framework.messages.Command));
@@ -280,6 +283,5 @@ context.start({
   supportedCommands: cast.framework.messages.Command.ALL_BASIC_MEDIA |
     cast.framework.messages.Command.QUEUE_PREV |
     cast.framework.messages.Command.QUEUE_NEXT |
-    cast.framework.messages.Command.STREAM_TRANSFER,
-  cont
+    cast.framework.messages.Command.STREAM_TRANSFER
 });
