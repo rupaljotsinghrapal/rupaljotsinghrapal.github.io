@@ -269,7 +269,8 @@ controls.assignButton(
 context.start({
   queue: new CastQueue(),
   playbackConfig: playbackConfig,
-  supportedMediaCommands: cast.framework.messages.Command.ALL_BASIC_MEDIA |
+  enforceSupportedCommands: true,
+  supportedCommands: cast.framework.messages.Command.ALL_BASIC_MEDIA |
     cast.framework.messages.Command.QUEUE_PREV |
     cast.framework.messages.Command.QUEUE_NEXT
 });
