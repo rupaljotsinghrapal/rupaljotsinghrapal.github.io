@@ -227,6 +227,7 @@ const playbackConfig = new cast.framework.PlaybackConfig();
 playbackConfig.autoResumeDuration = 5;
 castDebugLogger.info(LOG_RECEIVER_TAG,
   `autoResumeDuration set to: ${playbackConfig.autoResumeDuration}`);
+  castDebugLogger.info(cast.framework.system.MessageType.JSON);
 
 /**
  * Set the control buttons in the UI controls.
@@ -257,10 +258,7 @@ controls.assignButton(
 const CHANNEL = 'urn:x-cast:com.google.cast.mediaTesting';
 const options = new cast.framework.CastReceiverOptions();
 options.customNamespaces = Object.assign({});
-const objToSender = {
-  type: 'status',
-  message: 'Playing'
-};
+
 
 options.customNamespaces[CHANNEL] = cast.framework.system.MessageType.JSON;
 
