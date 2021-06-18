@@ -223,8 +223,8 @@ function sendMessage(msg) {
   var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
   if (castSession) {
     castSession.sendMessage('urn:x-cast:com.example.castdata', {
-      type: "message"
-          text: msg
+      type: "message",
+      text: "msg"
     });
   }
 }
