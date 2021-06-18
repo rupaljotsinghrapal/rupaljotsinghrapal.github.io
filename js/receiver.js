@@ -101,7 +101,7 @@ playerManager.setMessageInterceptor(
 //             request.media.mediaStatus = cast.framework.messages.Command.ALL_BASIC_MEDIA;
             castDebugLogger.warn(cast.framework.messages.MediaStatus.ALL_BASIC_MEDIA);
             castDebugLogger.warn(JSON.stringify(cast.framework));
-            castDebugLogger.warn(JSON.stringify(cast.fra)
+            castDebugLogger.warn(JSON.stringify(cast.framework.ui);
 
             castDebugLogger.warn(LOG_TAG, 'Playable URL:', request.media.contentUrl);
 
