@@ -98,7 +98,7 @@ playerManager.setMessageInterceptor(
               
             }
             
-            request.media.mediaStatus = cast.framework.messages.Command.ALL_BASIC_MEDIA;
+//             request.media.mediaStatus = cast.framework.messages.Command.ALL_BASIC_MEDIA;
             castDebugLogger.warn(cast.framework.messages.MediaStatus.ALL_BASIC_MEDIA);
             castDebugLogger.warn(JSON.stringify(cast.framework));
             castDebugLogger.warn(JSON.stringify(cast.fra)
