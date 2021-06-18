@@ -254,6 +254,21 @@ controls.assignButton(
   cast.framework.ui.ControlsButton.QUEUE_NEXT
 );
 
+
+const CUSTOM_CHANNEL = 'urn:x-cast:com.google.cast.media';
+context.addCustomMessageListener(CUSTOM_CHANNEL, function(customEvent) {
+  // handle customEvent.
+  castDebugLogger.error(customEvent);
+  castDebugLogger.warn("Rupal initiated this")
+  castDebugLogger.error(customEvent);
+  castDebugLogger.error(customEvent);
+  castDebugLogger.error(customEvent);
+  castDebugLogger.error(customEvent);
+  castDebugLogger.error(customEvent);
+
+});
+
+
 context.start({
   queue: new CastQueue(),
   playbackConfig: playbackConfig,

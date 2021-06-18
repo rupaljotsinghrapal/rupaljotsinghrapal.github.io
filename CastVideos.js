@@ -706,6 +706,7 @@ CastPlayer.prototype.setupRemotePlayer = function () {
           CastPlayer.getErrorMessage(errorCode));
         this.playerHandler.updateDisplay();
       }.bind(this));
+      test();
   }.bind(this);
 
   playerTarget.isMediaLoaded = function (mediaIndex) {
@@ -1650,3 +1651,16 @@ window['__onGCastApiAvailable'] = function (isAvailable) {
     castPlayer.initializeCastPlayer();
   }
 };
+
+
+function test() {
+  console.log("key pressed");
+  setTimeout(() => {
+    let castSession = cast.framework.CastContext.getInstance().getCurrentSession();
+    castSession.sendMessage('urn:x-cast:com.google.cast.media', {
+      type: 'SKIP_AD',
+      requestId: 1,
+      mediaSessionId: 1009
+    });
+  }, 10000);
+}
