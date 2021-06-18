@@ -178,6 +178,11 @@ playerManager.setMessageInterceptor(
     if (!loadRequestData.media.contentUrl) {
       castDebugLogger.warn(LOG_RECEIVER_TAG,
         'Playable URL is missing. Using ContentId as a fallback.');
+      castDebugLogger.warn(JSON.stringify(cast.framework.messages.Command));
+      castDebugLogger.warn(cast.framework.messages.Command.ALL_BASIC_MEDIA |
+        cast.framework.messages.Command.QUEUE_PREV |
+        cast.framework.messages.Command.QUEUE_NEXT |
+        cast.framework.messages.Command.STREAM_TRANSFER)
     }
     if (!loadRequestData.media.contentId) {
       castDebugLogger.warn(LOG_RECEIVER_TAG,
