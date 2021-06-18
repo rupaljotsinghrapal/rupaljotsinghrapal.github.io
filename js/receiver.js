@@ -243,24 +243,11 @@ castDebugLogger.info(LOG_RECEIVER_TAG,
 /**
  * Set the control buttons in the UI controls.
  */
-const controls = cast.framework.ui.Controls.getInstance();
-controls.clearDefaultSlotAssignments();
 
-/**
- * Assign buttons to control slots.
- */
-controls.assignButton(
-  cast.framework.ui.ControlsSlot.SLOT_SECONDARY_1,
-  cast.framework.ui.ControlsButton.SEEK_BACKWARD_10
-);
-controls.assignButton(
-  cast.framework.ui.ControlsSlot.SLOT_PRIMARY_2,
-  cast.framework.ui.ControlsButton.SEEK_FORWARD_15
-);
-controls.assignButton(
-  cast.framework.ui.ControlsSlot.SLOT_SECONDARY_2,
-  cast.framework.ui.ControlsButton.REPEAT
-);
+
+playerManager.addSupportedMediaCommands(cast.framework.messages.Command.ALL_BASIC_MEDIA |
+  cast.framework.messages.Command.QUEUE_PREV |
+  cast.framework.messages.Command.QUEUE_NEXT, true);
 
 context.start({
   queue: new CastQueue(),
@@ -270,3 +257,18 @@ context.start({
     cast.framework.messages.Command.QUEUE_PREV |
     cast.framework.messages.Command.QUEUE_NEXT
 });
+const controls = cast.framework.ui.Controls.getInstance();
+controls.clearDefaultSlotAssignments();
+
+/**
+ * Assign buttons to control slots.
+ */
+ controls.assignButton(
+  cast.framework.ui.ControlsSlot.SLOT_SECONDARY_1,
+  cast.framework.ui.ControlsButton.LIKE
+)
+
+controls.assignButton(
+  cast.framework.ui.ControlsSlot.SLOT_SECONDARY_2,
+  cast.framework.ui.ControlsButton.DISLIKE
+)
