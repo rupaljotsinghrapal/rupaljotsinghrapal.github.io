@@ -95,6 +95,7 @@ playerManager.setMessageInterceptor(
               request.media.contentUrl = item.stream.hls
               request.media.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.FMP4;
               request.media.hlsVideoSegmentFormat = cast.framework.messages.HlsVideoSegmentFormat.FMP4;
+              request.media.mediaStatus = cast.framework.messages.MediaStatus.ALL_BASIC_MEDIA;
             }
 
             castDebugLogger.warn(LOG_TAG, 'Playable URL:', request.media.contentUrl);
