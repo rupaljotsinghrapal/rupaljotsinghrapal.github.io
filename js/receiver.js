@@ -203,7 +203,7 @@ playerManager.setMessageInterceptor(
           let metadata = new cast.framework.messages.GenericMediaMetadata();
           metadata.title = item.title;
           metadata.subtitle = item.description;
-          loadRequestData.media.contentId = item.stream.dash;
+          loadRequestData.media.contentId = "https://videodelivery.net/b01d293852bde16b31140fcb187f8a13/manifest/video.m3u8";
           loadRequestData.media.contentType = 'application/dash+xml';
           loadRequestData.media.metadata = metadata;
           accept(loadRequestData);
