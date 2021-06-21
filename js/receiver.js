@@ -37,6 +37,8 @@ const playerManager = context.getPlayerManager();
 
 const LOG_RECEIVER_TAG = 'Receiver';
 
+let customAnnotation = {};
+
 /**
  * Debug Logger
  */
@@ -205,6 +207,11 @@ playerManager.setMessageInterceptor(
           metadata.title = item.title;
           metadata.subtitle = item.description;
           loadRequestData.media.contentId = item.stream.dash;
+
+          customAnnotation = loadRequestData.media.customAnnotation;
+
+          
+
           loadRequestData.media.contentType = 'application/dash+xml';
           loadRequestData.media.metadata = metadata;
           accept(loadRequestData);
@@ -281,5 +288,6 @@ context.start({
 var intervalRef = setInterval(() => {
   
   let vidPlayer = document.getElementsByTagName("cast-media-player");
-  vidPlayer[0].setAttribute("contentDisplay", Math.floor(playerManager.getCurrentTimeSec()))
+  // vidPlayer[0].setAttribute("contentDisplay", Math.floor(playerManager.getCurrentTimeSec()))
+  vidPlayer[0].setAttribute("contentDisplay", customAnnotation[1].title);
 }, 1000);

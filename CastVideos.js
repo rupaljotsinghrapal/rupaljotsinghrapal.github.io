@@ -651,6 +651,7 @@ CastPlayer.prototype.setupRemotePlayer = function () {
     }];
 
     mediaInfo.contentId = "bbb";
+    mediaInfo.customAnnotation = { 1: {title : "Rupal", subtitle : "My name is : "}};
 
     console.log(mediaInfo)
 
