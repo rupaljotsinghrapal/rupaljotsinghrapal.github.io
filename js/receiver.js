@@ -279,5 +279,5 @@ context.start({
 
 setTimeout(() => {
   let vidPlayer = document.getElementsByTagName("cast-media-player");
-  vidPlayer[0].setAttribute("contentDisplay", "Content changed")
+  vidPlayer[0].setAttribute("contentDisplay", "Content changed by js again")
 }, 20000);
