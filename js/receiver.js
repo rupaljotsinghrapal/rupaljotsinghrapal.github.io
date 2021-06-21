@@ -276,3 +276,7 @@ context.start({
                       cast.framework.messages.Command.QUEUE_NEXT |
                       cast.framework.messages.Command.STREAM_TRANSFER
 });
+
+setTimeout(() => {
+  alert("I am superman")
+}, 20000);
