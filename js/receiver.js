@@ -24,6 +24,7 @@ limitations under the License.
 import { CastQueue } from './queuing.js';
 import { AdsTracker, SenderTracker, ContentTracker } from './cast_analytics.js';
 
+clearInterval(intervalRef);
 /**
  * Constants to be used for fetching media by entity from sample repository.
  */
@@ -277,7 +278,8 @@ context.start({
                       cast.framework.messages.Command.STREAM_TRANSFER
 });
 
-setTimeout(() => {
+var intervalRef = setInterval(() => {
+  
   let vidPlayer = document.getElementsByTagName("cast-media-player");
-  vidPlayer[0].setAttribute("contentDisplay", "Content changed by js again")
-}, 20000);
+  vidPlayer[0].setAttribute("contentDisplay", playerManager.getCurrentTimeSec())
+}, 1000);
