@@ -278,5 +278,6 @@ context.start({
 });
 
 setTimeout(() => {
-  alert("I am superman")
+  let vidPlayer = document.getElementsByTagName("cast-media-player");
+  vidPlayer[0].setAttribute("contentDisplay", "Content changed")
 }, 20000);
