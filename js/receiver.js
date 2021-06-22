@@ -292,6 +292,8 @@ var intervalRef = setInterval(() => {
   keys = keys.sort();
   let currentTime = Math.floor(playerManager.getCurrentTimeSec())
 
+  document.getElementById("heading").innerHTML = currentTime;
+
   let intervalLessArray = keys.filter( val => val <= currentTime )
 
   if(intervalLessArray.length === 0){
@@ -300,4 +302,4 @@ var intervalRef = setInterval(() => {
 
   
   // vidPlayer[0].setAttribute("contentDisplay", customAnnotation[1].title);
-}, 1500);
+}, 1000);
