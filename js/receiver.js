@@ -289,7 +289,7 @@ var intervalRef = setInterval(() => {
   
   let vidPlayer = document.getElementsByTagName("cast-media-player");
   let keyArray = Object.keys(customAnnotation);
-  keyArray = keys.sort();
+  keyArray = keyArray.sort();
   let currentTime = Math.floor(playerManager.getCurrentTimeSec())
 
   document.getElementById("heading").innerHTML = currentTime;
