@@ -288,6 +288,6 @@ context.start({
 var intervalRef = setInterval(() => {
   
   let vidPlayer = document.getElementsByTagName("cast-media-player");
-  // vidPlayer[0].setAttribute("contentDisplay", Math.floor(playerManager.getCurrentTimeSec()))
-  vidPlayer[0].setAttribute("contentDisplay", customAnnotation[1].title);
+  vidPlayer[0].setAttribute("contentDisplay", Math.floor(playerManager.getCurrentTimeSec()))
+  // vidPlayer[0].setAttribute("contentDisplay", customAnnotation[1].title);
 }, 1000);
