@@ -90,7 +90,7 @@ playerManager.addEventListener(
         'LOAD_FAILED: Verify the load request is set up ' +
         'properly and the media is able to play.');
     }
-});
+  });
 
 /**
  * Example analytics tracking implementation. See cast_analytics.js. Must
@@ -110,25 +110,25 @@ const contentTracker = new ContentTracker();
  */
 function addBreaks(mediaInformation) {
   return fetchMediaByEntity('https://sample.com/ads/fbb_ad')
-  .then((clip1) => {
-    mediaInformation.breakClips = [
-      {
-        id: 'fbb_ad',
-        title: clip1.title,
-        contentUrl: clip1.stream.dash,
-        contentType: 'application/dash+xml',
-        whenSkippable: 5
-      }
-    ];
+    .then((clip1) => {
+      mediaInformation.breakClips = [
+        {
+          id: 'fbb_ad',
+          title: clip1.title,
+          contentUrl: clip1.stream.dash,
+          contentType: 'application/dash+xml',
+          whenSkippable: 5
+        }
+      ];
 
-    mediaInformation.breaks = [
-      {
-        id: 'pre-roll',
-        breakClipIds: ['fbb_ad'],
-        position: 0
-      }
-    ];
-  });
+      mediaInformation.breaks = [
+        {
+          id: 'pre-roll',
+          breakClipIds: ['fbb_ad'],
+          position: 0
+        }
+      ];
+    });
 }
 
 /**
@@ -146,20 +146,20 @@ function fetchMediaByEntity(entity) {
 
   return new Promise((accept, reject) => {
     fetch(CONTENT_URL)
-    .then((response) => response.json())
-    .then((obj) => {
-      if (obj) {
-        if (obj[key]) {
-          accept(obj[key]);
+      .then((response) => response.json())
+      .then((obj) => {
+        if (obj) {
+          if (obj[key]) {
+            accept(obj[key]);
+          }
+          else {
+            reject(`${key} not found in repository`);
+          }
         }
         else {
-          reject(`${key} not found in repository`);
+          reject('content repository not found');
         }
-      }
-      else {
-        reject('content repository not found');
-      }
-    });
+      });
   });
 }
 
@@ -169,8 +169,9 @@ function fetchMediaByEntity(entity) {
  */
 playerManager.setMessageInterceptor(
   cast.framework.messages.MessageType.LOAD, loadRequestData => {
-    castDebugLogger.debug(LOG_RECEIVER_TAG,
+    castDebugLogger.error(LOG_RECEIVER_TAG,
       `LOAD interceptor loadRequestData: ${JSON.stringify(loadRequestData)}`);
+    document.getElementById("heading").innerHTML = JSON.stringify(loadRequestData.media);
     if (!loadRequestData || !loadRequestData.media) {
       const error = new cast.framework.messages.ErrorData(
         cast.framework.messages.ErrorType.LOAD_FAILED);
@@ -183,21 +184,19 @@ playerManager.setMessageInterceptor(
         'Playable URL is missing. Using ContentId as a fallback.');
     }
     if (!loadRequestData.media.contentId) {
-        castDebugLogger.warn(LOG_RECEIVER_TAG,
-          'Missing Content ID and Playable URL. Using entity as a fallback');
+      castDebugLogger.warn(LOG_RECEIVER_TAG,
+        'Missing Content ID and Playable URL. Using entity as a fallback');
     }
 
     if (!loadRequestData.media.entity && loadRequestData.media.contentId) {
       loadRequestData.media.entity = loadRequestData.media.contentId;
       castDebugLogger.info(LOG_RECEIVER_TAG,
-          'Setting entity to contentId');
+        'Setting entity to contentId');
     }
     if (loadRequestData.media.entity) {
       castDebugLogger.info(LOG_RECEIVER_TAG,
-          `Loading entity ${loadRequestData.media.entity} from API`);
-      return new Promise((accept, reject) => {
-        addBreaks(loadRequestData.media)
-        .then(() => fetchMediaByEntity(loadRequestData.media.entity))
+        `Loading entity ${loadRequestData.media.entity} from API`);
+      return new Promise(fetchMediaByEntity(loadRequestData.media.entity)
         .then((item) => {
           if (!item) {
             reject();
@@ -210,17 +209,17 @@ playerManager.setMessageInterceptor(
 
           customAnnotation = loadRequestData.media.customAnnotation;
 
-          
+
 
           loadRequestData.media.contentType = 'application/dash+xml';
           loadRequestData.media.metadata = metadata;
           accept(loadRequestData);
         })
-      });
+      );
     }
     else {
       castDebugLogger.error(LOG_RECEIVER_TAG,
-          "Request missing valid target: no contentUrl, contentId, or entity");
+        "Request missing valid target: no contentUrl, contentId, or entity");
     }
 
     return loadRequestData;
@@ -264,7 +263,7 @@ controls.assignButton(
 
 
 const CUSTOM_CHANNEL = 'urn:x-cast:com.google.cast.media';
-context.addCustomMessageListener(CUSTOM_CHANNEL, function(customEvent) {
+context.addCustomMessageListener(CUSTOM_CHANNEL, function (customEvent) {
   // handle customEvent.
   castDebugLogger.error(customEvent);
   castDebugLogger.warn("Rupal initiated this")
@@ -280,26 +279,26 @@ context.start({
   queue: new CastQueue(),
   playbackConfig: playbackConfig,
   supportedCommands: cast.framework.messages.Command.ALL_BASIC_MEDIA |
-                      cast.framework.messages.Command.QUEUE_PREV |
-                      cast.framework.messages.Command.QUEUE_NEXT |
-                      cast.framework.messages.Command.STREAM_TRANSFER
+    cast.framework.messages.Command.QUEUE_PREV |
+    cast.framework.messages.Command.QUEUE_NEXT |
+    cast.framework.messages.Command.STREAM_TRANSFER
 });
 
 var intervalRef = setInterval(() => {
-  
+
   let vidPlayer = document.getElementsByTagName("cast-media-player");
   let keyArray = Object.keys(customAnnotation);
   keyArray = keyArray.sort();
   let currentTime = Math.floor(playerManager.getCurrentTimeSec())
 
-  document.getElementById("heading").innerHTML = currentTime;
+  // document.getElementById("heading").innerHTML = currentTime;
 
-  let intervalLessArray = keyArray.filter( val => val <= currentTime )
+  let intervalLessArray = keyArray.filter(val => val <= currentTime)
 
-  if(intervalLessArray.length >= 0){
-    vidPlayer[0].setAttribute("contentDisplay", customAnnotation[intervalLessArray[intervalLessArray.length - 1]])
+  if (intervalLessArray.length >= 0 && currentTime > 0) {
+    vidPlayer[0].setAttribute("contentDisplay", customAnnotation[intervalLessArray[intervalLessArray.length - 1]].title)
   }
 
-  
+
   // vidPlayer[0].setAttribute("contentDisplay", customAnnotation[1].title);
 }, 1000);
