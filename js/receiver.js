@@ -289,18 +289,18 @@ var intervalRef = setInterval(() => {
   
   let vidPlayer = document.getElementsByTagName("cast-media-player");
   let keys = Object.keys(customAnnotation);
+  keys = keys.sort();
 
-  if(customAnnotation[Math.floor(playerManager.getCurrentTimeSec())]){
-    vidPlayer[0].setAttribute("contentDisplay", customAnnotation[Math.floor(playerManager.getCurrentTimeSec())].title);
+  let currentTime = Math.floor(playerManager.getCurrentTimeSec())
+
+  if(customAnnotation[Math.floor(currentTime)] && currentTime > 0){
+    vidPlayer[0].setAttribute("contentDisplay", customAnnotation[Math.floor(currentTime)].title);
   } else {
-    let currentTime = Math.floor(playerManager.getCurrentTimeSec())
+    
     for(let i=0; i<keys.length; i++){
-      if(currentTime < keys[i]){
+      if(currentTime >= keys[i]){
         vidPlayer[0].setAttribute("contentDisplay", customAnnotation[keys[i]].title);
-      } else {
-        break;
       }
-      
     }
   }
 
