@@ -180,7 +180,7 @@ playerManager.setMessageInterceptor(
       let metadata = new cast.framework.messages.GenericMediaMetadata();
       metadata.title = "title";
       metadata.subtitle = "description";
-      loadRequestData.media.contentId = "https://storage.googleapis.com/cpe-sample-media/content/big_buck_bunny/big_buck_bunny_m4s_master.mpd";
+      // loadRequestData.media.contentId = "https://storage.googleapis.com/cpe-sample-media/content/ads/for_bigger_meltdowns/for_bigger_meltdowns_m4s_master.mpd";
 
       customAnnotation = loadRequestData.media.customAnnotation;
 

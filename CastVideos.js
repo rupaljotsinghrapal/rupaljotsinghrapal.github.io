@@ -650,7 +650,7 @@ CastPlayer.prototype.setupRemotePlayer = function () {
       'url': MEDIA_SOURCE_ROOT + this.mediaContents[mediaIndex]['thumb']
     }];
 
-    mediaInfo.contentId = "bbb";
+    mediaInfo.contentId = "https://storage.googleapis.com/cpe-sample-media/content/ads/for_bigger_meltdowns/for_bigger_meltdowns_m4s_master.mpd";
     mediaInfo.customAnnotation = {
       1: { title: "Rupal", subtitle: "My name is : " },
       2: { title: "two", subtitle: "My name is : " },
