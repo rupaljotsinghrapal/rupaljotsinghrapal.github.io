@@ -651,7 +651,16 @@ CastPlayer.prototype.setupRemotePlayer = function () {
     }];
 
     mediaInfo.contentId = "bbb";
-    mediaInfo.customAnnotation = { 1: {title : "Rupal", subtitle : "My name is : "}};
+    mediaInfo.customAnnotation = {
+      1: { title: "Rupal", subtitle: "My name is : " },
+      2: { title: "two", subtitle: "My name is : " },
+      7: { title: "seven", subtitle: "My name is : " },
+      9: { title: "nine", subtitle: "My name is : " },
+      13: { title: "thirteen", subtitle: "My name is : " },
+      20: { title: "twenty", subtitle: "My name is : " },
+      68: { title: "sixty eight", subtitle: "My name is : " },
+
+    };
 
     console.log(mediaInfo)
 
@@ -707,7 +716,7 @@ CastPlayer.prototype.setupRemotePlayer = function () {
           CastPlayer.getErrorMessage(errorCode));
         this.playerHandler.updateDisplay();
       }.bind(this));
-      test();
+    test();
   }.bind(this);
 
   playerTarget.isMediaLoaded = function (mediaIndex) {
