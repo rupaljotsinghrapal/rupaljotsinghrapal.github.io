@@ -96,9 +96,9 @@ playerManager.addEventListener(
  * Example analytics tracking implementation. See cast_analytics.js. Must
  * complete TODO item in google_analytics.js.
  */
-const adTracker = new AdsTracker();
-const senderTracker = new SenderTracker();
-const contentTracker = new ContentTracker();
+// const adTracker = new AdsTracker();
+// const senderTracker = new SenderTracker();
+// const contentTracker = new ContentTracker();
 // adTracker.startTracking();
 // senderTracker.startTracking();
 // contentTracker.startTracking();
@@ -172,57 +172,29 @@ playerManager.setMessageInterceptor(
     castDebugLogger.error(LOG_RECEIVER_TAG,
       `LOAD interceptor loadRequestData: ${JSON.stringify(loadRequestData)}`);
     document.getElementById("heading").innerHTML = JSON.stringify(loadRequestData.media);
-    if (!loadRequestData || !loadRequestData.media) {
-      const error = new cast.framework.messages.ErrorData(
-        cast.framework.messages.ErrorType.LOAD_FAILED);
-      error.reason = cast.framework.messages.ErrorReason.INVALID_REQUEST;
-      castDebugLogger.error(LOG_RECEIVER_TAG, 'Invalid load request');
-      return error;
-    }
-    if (!loadRequestData.media.contentUrl) {
-      castDebugLogger.warn(LOG_RECEIVER_TAG,
-        'Playable URL is missing. Using ContentId as a fallback.');
-    }
-    if (!loadRequestData.media.contentId) {
-      castDebugLogger.warn(LOG_RECEIVER_TAG,
-        'Missing Content ID and Playable URL. Using entity as a fallback');
-    }
+    
+    
+      
 
-    if (!loadRequestData.media.entity && loadRequestData.media.contentId) {
-      loadRequestData.media.entity = loadRequestData.media.contentId;
-      castDebugLogger.info(LOG_RECEIVER_TAG,
-        'Setting entity to contentId');
-    }
-    if (loadRequestData.media.entity) {
-      castDebugLogger.info(LOG_RECEIVER_TAG,
-        `Loading entity ${loadRequestData.media.entity} from API`);
-      return new Promise(fetchMediaByEntity(loadRequestData.media.entity)
-        .then((item) => {
-          if (!item) {
-            reject();
-          }
 
-          let metadata = new cast.framework.messages.GenericMediaMetadata();
-          metadata.title = item.title;
-          metadata.subtitle = item.description;
-          loadRequestData.media.contentId = item.stream.dash;
+      let metadata = new cast.framework.messages.GenericMediaMetadata();
+      metadata.title = "title";
+      metadata.subtitle = "description";
+      loadRequestData.media.contentId = "https://storage.googleapis.com/cpe-sample-media/content/big_buck_bunny/big_buck_bunny_m4s_master.mpd";
 
-          customAnnotation = loadRequestData.media.customAnnotation;
+      customAnnotation = loadRequestData.media.customAnnotation;
 
 
 
-          loadRequestData.media.contentType = 'application/dash+xml';
-          loadRequestData.media.metadata = metadata;
-          accept(loadRequestData);
-        })
-      );
-    }
-    else {
-      castDebugLogger.error(LOG_RECEIVER_TAG,
-        "Request missing valid target: no contentUrl, contentId, or entity");
-    }
+      loadRequestData.media.contentType = 'application/dash+xml';
+      loadRequestData.media.metadata = metadata;
+      return loadRequestData;
+    
 
-    return loadRequestData;
+
+
+
+    // return loadRequestData;
   });
 
 const playbackConfig = new cast.framework.PlaybackConfig();
