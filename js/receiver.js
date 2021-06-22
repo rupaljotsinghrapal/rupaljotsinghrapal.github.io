@@ -290,18 +290,12 @@ var intervalRef = setInterval(() => {
   let vidPlayer = document.getElementsByTagName("cast-media-player");
   let keys = Object.keys(customAnnotation);
   keys = keys.sort();
-
   let currentTime = Math.floor(playerManager.getCurrentTimeSec())
 
-  if(customAnnotation[Math.floor(currentTime)] && currentTime > 0){
-    vidPlayer[0].setAttribute("contentDisplay", customAnnotation[Math.floor(currentTime)].title);
-  } else {
-    
-    for(let i=0; i<keys.length; i++){
-      if(currentTime >= keys[i]){
-        vidPlayer[0].setAttribute("contentDisplay", customAnnotation[keys[i]].title);
-      }
-    }
+  let intervalLessArray = keys.filter( val => val <= currentTime )
+
+  if(intervalLessArray.length === 0){
+    vidPlayer[0].setAttribute("contentDisplay", customAnnotation[intervalLessArray.length - 1])
   }
 
   
