@@ -297,11 +297,11 @@ var intervalRef = setInterval(() => {
     let currentTime = Math.floor(playerManager.getCurrentTimeSec())
     
     for(let i=0; i<keys.length; i++){
-      if(currentTime > keys[i] && i > 0){
+      if(currentTime < keys[i] && i > 0){
         
         vidPlayer[0].setAttribute("contentDisplay", customElements[keys[i-1]].title);
         break;
-        
+
       }
     }
   }
