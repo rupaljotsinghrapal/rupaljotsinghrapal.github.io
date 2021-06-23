@@ -256,17 +256,17 @@ context.start({
     cast.framework.messages.Command.STREAM_TRANSFER
 });
 
-// var intervalRef = setInterval(() => {
+var intervalRef = setInterval(() => {
 
-//   let vidPlayer = document.getElementsByTagName("cast-media-player");
-//   let keyArray = Object.keys(customAnnotation);
+  // let vidPlayer = document.getElementsByTagName("cast-media-player");
+  // let keyArray = Object.keys(customAnnotation);
 
-//   let currentTime = Math.floor(playerManager.getCurrentTimeSec())
+  // let currentTime = Math.floor(playerManager.getCurrentTimeSec())
 
-//   let intervalLessArray = keyArray.filter(val => val < currentTime)
+  // let intervalLessArray = keyArray.filter(val => val < currentTime)
 
-//   if (intervalLessArray.length >= 0 && currentTime > 0) {
-//     vidPlayer[0].setAttribute("contentDisplay", customAnnotation[intervalLessArray[intervalLessArray.length - 1]].title)
-//   }
+  // if (intervalLessArray.length >= 0 && currentTime > 0) {
+  //   vidPlayer[0].setAttribute("contentDisplay", customAnnotation[intervalLessArray[intervalLessArray.length - 1]].title)
+  // }
 
-// }, 1000);
+}, 1000);
