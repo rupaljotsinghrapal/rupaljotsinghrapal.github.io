@@ -187,7 +187,7 @@ playerManager.setMessageInterceptor(
 
 
       loadRequestData.media.contentType = 'application/dash+xml';
-      loadRequestData.media.metadata = metadata;
+      // loadRequestData.media.metadata = metadata;
       return loadRequestData;
     
 
