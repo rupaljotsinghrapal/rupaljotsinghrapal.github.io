@@ -182,7 +182,7 @@ playerManager.setMessageInterceptor(
       metadata.subtitle = "description";
       loadRequestData.media.contentId = "https://storage.googleapis.com/cpe-sample-media/content/big_buck_bunny/big_buck_bunny_m4s_master.mpd";
 
-      customAnnotation = loadRequestData.media.customAnnotation;
+      customAnnotation = loadRequestData.media.customData;
 
 
 

@@ -25,16 +25,7 @@ cast-media-player {
   --splash-size: cover;
   --slideshow-interval: 8;
   --slideshow-animation: 3;
-  --slideshow-image-1: url('res/background-2.jpg');
-  --slideshow-image-2: url('res/hub-1.jpg');
-  --slideshow-image-3: url('res/hub-2.jpg');
-  --slideshow-image-4: url('res/hub-3.jpg');
-  --slideshow-image-5: url('res/hub-4.jpg');
-  --slideshow-image-6: url('res/max-1.jpg');
-  --slideshow-image-7: url('res/max-4.jpg');
-  --slideshow-image-8: url('res/home-1.jpg');
-  --slideshow-image-9: url('res/home-2.jpg');
-  --slideshow-image-10: url('res/mini-1.jpg');
+  
 }
 
 /* ------------------------------------------------- */
@@ -52,4 +43,9 @@ cast-media-player:after {
   margin-bottom: 15px;
   opacity: 1;
   color: red;
+}
+
+.watermark {
+  background-image: url(watermark.png);
+  background-size: 57px 57px;
 }
