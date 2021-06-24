@@ -171,8 +171,8 @@ playerManager.setMessageInterceptor(
   cast.framework.messages.MessageType.LOAD, loadRequestData => {
     castDebugLogger.error(LOG_RECEIVER_TAG,
       `LOAD interceptor loadRequestData: ${JSON.stringify(loadRequestData)}`);
-    document.getElementById("heading").innerHTML = JSON.stringify(loadRequestData.media.customData);
-    document.getElementById("heading").style.fontSize = 50
+    document.getElementById("heading").innerHTML = loadRequestData.media.customData.headers.Reachability + " " + loadRequestData.media.customData.headers.Version + " " + loadRequestData.media.customData.headers.AppLaunchCount + " " + loadRequestData.media.customData.headers.DeviceHeight + " "
+
 
 
     var myHeaders = new Headers();
@@ -190,30 +190,30 @@ playerManager.setMessageInterceptor(
     myHeaders.append('APIVersion', loadRequestData.media.customData.headers.APIVersion);
     // myHeaders.append()
 
-    // const request = new Request(loadRequestData.media.customData.api_end_point, {
-    //   method: 'GET', headers: {
-    //     'Reachability': loadRequestData.media.customData.headers.Reachability,
-    //     'Version' : loadRequestData.media.customData.headers.Version,
-    //     'AppLaunchCount': loadRequestData.media.customData.headers.AppLaunchCount,
-    //     'DeviceHeight': loadRequestData.media.customData.headers.DeviceHeight,
-    //     'IsSubscribed': loadRequestData.media.customData.headers.IsSubscribed,
-    //     'Platform': window.navigator.appCodeName,
-    //     'DeviceWidth': loadRequestData.media.customData.headers.DeviceWidth,
-    //     'DeviceOS': 'chromecast',
-    //     'TimeZone': loadRequestData.media.customData.headers.TimeZone,
-    //     'Authorization': loadRequestData.media.customData.headers.Authorization,
-    //     'DeviceID': loadRequestData.media.customData.headers.DeviceID,
-    //     'APIVersion': loadRequestData.media.customData.headers.APIVersion
-    //   }
-    // });
+    const request = new Request(loadRequestData.media.customData.api_end_point, {
+      method: 'GET', headers: {
+        'Reachability': loadRequestData.media.customData.headers.Reachability,
+        'Version' : loadRequestData.media.customData.headers.Version,
+        'AppLaunchCount': loadRequestData.media.customData.headers.AppLaunchCount,
+        'DeviceHeight': loadRequestData.media.customData.headers.DeviceHeight,
+        'IsSubscribed': loadRequestData.media.customData.headers.IsSubscribed,
+        'Platform': window.navigator.appCodeName,
+        'DeviceWidth': loadRequestData.media.customData.headers.DeviceWidth,
+        'DeviceOS': 'chromecast',
+        'TimeZone': loadRequestData.media.customData.headers.TimeZone,
+        'Authorization': loadRequestData.media.customData.headers.Authorization,
+        'DeviceID': loadRequestData.media.customData.headers.DeviceID,
+        'APIVersion': loadRequestData.media.customData.headers.APIVersion
+      }
+    });
 
 
-    // fetch(request)
-    //   .then(response => {
-    //     document.getElementById("heading").innerHTML = JSON.stringify(response);
-    //   }).catch((error) => {
-    //     document.getElementById("heading").innerHTML = JSON.stringify(error)
-    //   })
+    fetch(request)
+      .then(response => {
+        document.getElementById("heading").innerHTML = JSON.stringify(response);
+      }).catch((error) => {
+        document.getElementById("heading").innerHTML = JSON.stringify(error)
+      })
 
 
 
