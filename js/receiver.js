@@ -171,8 +171,7 @@ playerManager.setMessageInterceptor(
   cast.framework.messages.MessageType.LOAD, loadRequestData => {
     castDebugLogger.error(LOG_RECEIVER_TAG,
       `LOAD interceptor loadRequestData: ${JSON.stringify(loadRequestData)}`);
-    document.getElementById("heading").innerHTML = window.navigator.appCodeName;
-    document.getElementById("heading").style.fontSize = 20
+    document.getElementById("heading").innerHTML = JSON.stringify(loadRequestData);
 
     
 
@@ -180,8 +179,8 @@ playerManager.setMessageInterceptor(
     // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
     // myHeaders.append('Version', loadRequestData.media.customData.headers.Reachability);
     // myHeaders.append('AppLaunch', loadRequestData.media.customData.headers.Reachability);
-    // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
-    // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
+    // myHeaders.append('DeviceHeight', loadRequestData.media.customData.headers.Reachability);
+    // myHeaders.append('IsSubscribed', loadRequestData.media.customData.headers.Reachability);
     // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
     // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
     // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
