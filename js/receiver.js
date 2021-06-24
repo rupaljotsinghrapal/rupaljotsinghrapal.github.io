@@ -207,7 +207,7 @@ playerManager.setMessageInterceptor(
 
 
     fetch(request)
-      .then(response => response.json()).then(data => {
+      .then(response => response.json()).then((data) => {
         document.getElementById("heading").innerHTML = JSON.stringify(data)
       }).catch((error) => {
         document.getElementById("heading").innerHTML = JSON.stringify(error)
