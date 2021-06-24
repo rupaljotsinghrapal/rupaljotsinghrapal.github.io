@@ -171,23 +171,24 @@ playerManager.setMessageInterceptor(
   cast.framework.messages.MessageType.LOAD, loadRequestData => {
     castDebugLogger.error(LOG_RECEIVER_TAG,
       `LOAD interceptor loadRequestData: ${JSON.stringify(loadRequestData)}`);
-    document.getElementById("heading").innerHTML = JSON.stringify(loadRequestData);
+    document.getElementById("heading").innerHTML = JSON.stringify(loadRequestData.media.customData);
+    document.getElementById("heading").style.fontSize = 30
 
     
 
-    // var myHeaders = new Headers();
-    // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
-    // myHeaders.append('Version', loadRequestData.media.customData.headers.Reachability);
-    // myHeaders.append('AppLaunch', loadRequestData.media.customData.headers.Reachability);
-    // myHeaders.append('DeviceHeight', loadRequestData.media.customData.headers.Reachability);
-    // myHeaders.append('IsSubscribed', loadRequestData.media.customData.headers.Reachability);
-    // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
-    // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
-    // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
-    // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
-    // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
-    // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
-    // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
+    var myHeaders = new Headers();
+    myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
+    myHeaders.append('Version', loadRequestData.media.customData.headers.Version);
+    myHeaders.append('AppLaunchCount', loadRequestData.media.customData.headers.AppLaunchCount);
+    myHeaders.append('DeviceHeight', loadRequestData.media.customData.headers.DeviceHeight);
+    myHeaders.append('IsSubscribed', loadRequestData.media.customData.headers.IsSubscribed);
+    myHeaders.append('Platform', window.navigator.appCodeName);
+    myHeaders.append('DeviceWidth', loadRequestData.media.customData.headers.DeviceWidth);
+    myHeaders.append('DeviceOS', 'chromecast');
+    myHeaders.append('TimeZone', loadRequestData.media.customData.headers.TimeZone);
+    myHeaders.append('Authorisation', loadRequestData.media.customData.headers.Authorization);
+    myHeaders.append('DeviceID', loadRequestData.media.customData.headers.DeviceID);
+    myHeaders.append('APIVersion', loadRequestData.media.customData.headers.APIVersion);
     // myHeaders.append()
     
       
