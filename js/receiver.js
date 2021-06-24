@@ -171,14 +171,25 @@ playerManager.setMessageInterceptor(
   cast.framework.messages.MessageType.LOAD, loadRequestData => {
     castDebugLogger.error(LOG_RECEIVER_TAG,
       `LOAD interceptor loadRequestData: ${JSON.stringify(loadRequestData)}`);
-    document.getElementById("heading").innerHTML = window.navigator.platform;
+    document.getElementById("heading").innerHTML = window.navigator.userAgent;
     document.getElementById("heading").style.fontSize = 20
 
     
 
-    var myHeaders = new Headers();
-    myHeaders.append('headers', loadRequestData.media.customData.headers);
-    myHeaders.append()
+    // var myHeaders = new Headers();
+    // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
+    // myHeaders.append('Version', loadRequestData.media.customData.headers.Reachability);
+    // myHeaders.append('AppLaunch', loadRequestData.media.customData.headers.Reachability);
+    // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
+    // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
+    // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
+    // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
+    // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
+    // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
+    // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
+    // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
+    // myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
+    // myHeaders.append()
     
       
 
