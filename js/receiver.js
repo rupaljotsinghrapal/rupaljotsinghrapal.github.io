@@ -171,7 +171,7 @@ playerManager.setMessageInterceptor(
   cast.framework.messages.MessageType.LOAD, loadRequestData => {
     castDebugLogger.error(LOG_RECEIVER_TAG,
       `LOAD interceptor loadRequestData: ${JSON.stringify(loadRequestData)}`);
-    document.getElementById("heading").innerHTML = window.navigator.userAgent;
+    document.getElementById("heading").innerHTML = window.navigator.appCodeName;
     document.getElementById("heading").style.fontSize = 20
 
     
