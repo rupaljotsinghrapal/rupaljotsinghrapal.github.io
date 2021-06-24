@@ -208,12 +208,12 @@ playerManager.setMessageInterceptor(
     });
 
 
-    fetch(request)
-      .then(response => {
-        document.getElementById("heading").innerHTML = JSON.stringify(response);
-      }).catch((error) => {
-        document.getElementById("heading").innerHTML = JSON.stringify(error)
-      })
+    // fetch(request)
+    //   .then(response => {
+    //     document.getElementById("heading").innerHTML = JSON.stringify(response);
+    //   }).catch((error) => {
+    //     document.getElementById("heading").innerHTML = JSON.stringify(error)
+    //   })
 
 
 
