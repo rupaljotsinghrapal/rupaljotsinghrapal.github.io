@@ -171,12 +171,14 @@ playerManager.setMessageInterceptor(
   cast.framework.messages.MessageType.LOAD, loadRequestData => {
     castDebugLogger.error(LOG_RECEIVER_TAG,
       `LOAD interceptor loadRequestData: ${JSON.stringify(loadRequestData)}`);
-    document.getElementById("heading").innerHTML = loadRequestData.media.customData.headers.Reachability;
+    document.getElementById("heading").innerHTML = JSON.strigify(loadRequestData.media.customData);
+    document.getElementById("heading").style.fontSize = 20
 
     
 
-    // var myHeaders = new Headers();
-    // myHeaders.append('Reachability', loadRequestData.media.customData.);
+    var myHeaders = new Headers();
+    myHeaders.append('headers', loadRequestData.media.customData.headers);
+    myHeaders.append()
     
       
 
