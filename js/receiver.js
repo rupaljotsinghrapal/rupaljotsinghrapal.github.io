@@ -171,7 +171,7 @@ playerManager.setMessageInterceptor(
   cast.framework.messages.MessageType.LOAD, loadRequestData => {
     castDebugLogger.error(LOG_RECEIVER_TAG,
       `LOAD interceptor loadRequestData: ${JSON.stringify(loadRequestData)}`);
-    document.getElementById("heading").innerHTML = `${loadRequestData.media.customData.headers.Reachability} ${loadRequestData.media.customData.headers.Version} ${loadRequestData.media.customData.headers.AppLaunchCount} ${loadRequestData.media.customData.headers.DeviceHeight} ${oadRequestData.media.customData.headers.IsSubscribed} ${window.navigator.appCodeName} ${loadRequestData.media.customData.headers.DeviceWidth} ${loadRequestData.media.customData.headers.TimeZone} ${loadRequestData.media.customData.headers.Authorization} ${loadRequestData.media.customData.headers.DeviceID} ${loadRequestData.media.customData.headers.APIVersion} ${loadRequestData.media.customData.api_end_point}`;
+    document.getElementById("heading").innerHTML = loadRequestData.media.customData.headers.Reachability + loadRequestData.media.customData.headers.Version + loadRequestData.media.customData.headers.AppLaunchCount + loadRequestData.media.customData.headers.DeviceHeight + loadRequestData.media.customData.headers.IsSubscribed + window.navigator.appCodeName + loadRequestData.media.customData.headers.DeviceWidth + loadRequestData.media.customData.headers.TimeZone + loadRequestData.media.customData.headers.Authorization + loadRequestData.media.customData.headers.DeviceID + loadRequestData.media.customData.headers.APIVersion + loadRequestData.media.customData.api_end_point;
 
     var myHeaders = new Headers();
     myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
