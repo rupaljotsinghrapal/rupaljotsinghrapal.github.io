@@ -171,7 +171,7 @@ playerManager.setMessageInterceptor(
   cast.framework.messages.MessageType.LOAD, loadRequestData => {
     castDebugLogger.error(LOG_RECEIVER_TAG,
       `LOAD interceptor loadRequestData: ${JSON.stringify(loadRequestData)}`);
-    document.getElementById("heading").innerHTML = loadRequestData.media.customData.Reachability;
+    document.getElementById("heading").innerHTML = loadRequestData.media.customData["Reachability"];
 
     
 
