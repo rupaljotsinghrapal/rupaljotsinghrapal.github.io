@@ -172,9 +172,8 @@ playerManager.setMessageInterceptor(
     castDebugLogger.error(LOG_RECEIVER_TAG,
       `LOAD interceptor loadRequestData: ${JSON.stringify(loadRequestData)}`);
     document.getElementById("heading").innerHTML = JSON.stringify(loadRequestData.media.customData);
-    document.getElementById("heading").style.fontSize = 30
 
-    
+
 
     var myHeaders = new Headers();
     myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
@@ -186,27 +185,55 @@ playerManager.setMessageInterceptor(
     myHeaders.append('DeviceWidth', loadRequestData.media.customData.headers.DeviceWidth);
     myHeaders.append('DeviceOS', 'chromecast');
     myHeaders.append('TimeZone', loadRequestData.media.customData.headers.TimeZone);
-    myHeaders.append('Authorisation', loadRequestData.media.customData.headers.Authorization);
+    myHeaders.append('Authorization', loadRequestData.media.customData.headers.Authorization);
     myHeaders.append('DeviceID', loadRequestData.media.customData.headers.DeviceID);
     myHeaders.append('APIVersion', loadRequestData.media.customData.headers.APIVersion);
     // myHeaders.append()
-    
-      
+
+    const request = new Request(loadRequestData.media.customData.api_end_point, {
+      method: 'GET', headers: {
+        'Reachability': loadRequestData.media.customData.headers.Reachability,
+        'Version' : loadRequestData.media.customData.headers.Version,
+        'AppLaunchCount': loadRequestData.media.customData.headers.AppLaunchCount,
+        'DeviceHeight': loadRequestData.media.customData.headers.DeviceHeight,
+        'IsSubscribed': loadRequestData.media.customData.headers.IsSubscribed,
+        'Platform': window.navigator.appCodeName,
+        'DeviceWidth': loadRequestData.media.customData.headers.DeviceWidth,
+        'DeviceOS': 'chromecast',
+        'TimeZone': loadRequestData.media.customData.headers.TimeZone,
+        'Authorization': loadRequestData.media.customData.headers.Authorization,
+        'DeviceID': loadRequestData.media.customData.headers.DeviceID,
+        'APIVersion': loadRequestData.media.customData.headers.APIVersion
+      }
+    });
 
 
-      let metadata = new cast.framework.messages.GenericMediaMetadata();
-      metadata.title = "title";
-      metadata.subtitle = "description";
-      // loadRequestData.media.contentId = "https://storage.googleapis.com/cpe-sample-media/content/big_buck_bunny/big_buck_bunny_m4s_master.mpd";
+    fetch(request)
+      .then(response => {
+        document.getElementById("heading").innerHTML = JSON.stringify(response);
+      }).catch((error) => {
+        document.getElementById("heading").innerHTML = JSON.stringify(error)
+      })
 
-      customAnnotation = loadRequestData.media.customData;
 
 
 
-      loadRequestData.media.contentType = 'application/dash+xml';
-      // loadRequestData.media.metadata = metadata;
-      return loadRequestData;
-    
+
+
+
+    let metadata = new cast.framework.messages.GenericMediaMetadata();
+    metadata.title = "title";
+    metadata.subtitle = "description";
+    // loadRequestData.media.contentId = "https://storage.googleapis.com/cpe-sample-media/content/big_buck_bunny/big_buck_bunny_m4s_master.mpd";
+
+    customAnnotation = loadRequestData.media.customData;
+
+
+
+    loadRequestData.media.contentType = 'application/dash+xml';
+    // loadRequestData.media.metadata = metadata;
+    return loadRequestData;
+
 
 
 
