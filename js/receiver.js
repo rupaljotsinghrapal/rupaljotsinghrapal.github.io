@@ -217,7 +217,7 @@ playerManager.setMessageInterceptor(
                 ends_at: item.ends_at
               }
 
-              for(let i = (item.starts_at - item.ends_at); i > 0; i--){
+              for(let i = (item.ends_at - item.starts_at); i > 0; i--){
                 let obj = {
                   type : "duration",
                   title : i
@@ -231,14 +231,12 @@ playerManager.setMessageInterceptor(
               }
             }
           }
-
-          document.getElementById("heading").innerHTML = JSON.stringify(annotations);
           
 
         }
 
       }).catch((error) => {
-        document.getElementById("heading").innerHTML = JSON.stringify(error)
+        console.log(error)
       })
 
 
@@ -316,25 +314,21 @@ context.start({
 
 var intervalRef = setInterval(() => {
 
-  // let vidPlayer = document.getElementsByTagName("cast-media-player");
+  let vidPlayer = document.getElementsByTagName("cast-media-player");
 
+  let currentTime = Math.floor(playerManager.getCurrentTimeSec())
 
-  // let currentTime = Math.floor(playerManager.getCurrentTimeSec())
-
-  // if(annotations[`${currentTime}`].type === "text"){
-  //   document.getElementById("heading").innerHTML = annotations[`${currentTime}`].title
-  //   vidPlayer[0].setAttribute("contentDisplay", annotations[`${currentTime}`].subtitle)
-  // } else if (annotations[`${currentTime}`].type === "timer") {
-  //   document.getElementById("heading").innerHTML = annotations[`${currentTime}`].duration
-  //   vidPlayer[0].setAttribute("contentDisplay", annotations[`${currentTime}`].subtitle)
-  // } else if(annotations[`${currentTime}`].type === "clear") {
-  //   document.getElementById("heading").innerHTML = ""
-  //   vidPlayer[0].setAttribute("contentDisplay", "")
-  // } else if(annotations[`${currentTime}`].type === "duration") {
-  //   document.getElementById("heading").innerHTML = ""
-  // }
-
-  
-
+  if(annotations[`${currentTime}`].type === "text"){
+    document.getElementById("heading").innerHTML = annotations[`${currentTime}`].title
+    vidPlayer[0].setAttribute("contentDisplay", annotations[`${currentTime}`].subtitle)
+  } else if (annotations[`${currentTime}`].type === "timer") {
+    document.getElementById("heading").innerHTML = annotations[`${currentTime}`].duration
+    vidPlayer[0].setAttribute("contentDisplay", annotations[`${currentTime}`].subtitle)
+  } else if(annotations[`${currentTime}`].type === "clear") {
+    document.getElementById("heading").innerHTML = ""
+    vidPlayer[0].setAttribute("contentDisplay", "")
+  } else if(annotations[`${currentTime}`].type === "duration") {
+    document.getElementById("heading").innerHTML = title + "s";
+  }
 
 }, 100);
