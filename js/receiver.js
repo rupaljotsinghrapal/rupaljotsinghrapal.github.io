@@ -217,15 +217,14 @@ playerManager.setMessageInterceptor(
                 ends_at: item.ends_at
               }
 
-              // let counter = item.ends_at - item.starts_at;
-              // while(counter > 0){
-              //   let time = parseInt(item.starts_at) + 1
-              //   annotations[`${time}`] = {
-              //     type: "duration",
-              //     title: counter-1
-              //   }
-              //   counter--;
-              // }
+              for(let i = (item.starts_at - item.ends_at); i > 0; i--){
+                let obj = {
+                  type : "duration",
+                  title : i
+                };
+                let timeSec = item.ends_at - i;
+                annotations[timeSec] = obj;
+              }
 
               annotations[item.ends_at] = {
                 type: "clear"
@@ -233,7 +232,8 @@ playerManager.setMessageInterceptor(
             }
           }
 
-          document.getElementById("heading").innerHTML = JSON.stringify(annotations)
+          document.getElementById("heading").innerHTML = JSON.stringify(annotations);
+          
 
         }
 
@@ -316,12 +316,25 @@ context.start({
 
 var intervalRef = setInterval(() => {
 
-  let vidPlayer = document.getElementsByTagName("cast-media-player");
+  // let vidPlayer = document.getElementsByTagName("cast-media-player");
 
 
-  let currentTime = Math.floor(playerManager.getCurrentTimeSec())
+  // let currentTime = Math.floor(playerManager.getCurrentTimeSec())
 
-  vidPlayer[0].setAttribute("contentDisplay", annotations[`${currentTime}`].title)
+  // if(annotations[`${currentTime}`].type === "text"){
+  //   document.getElementById("heading").innerHTML = annotations[`${currentTime}`].title
+  //   vidPlayer[0].setAttribute("contentDisplay", annotations[`${currentTime}`].subtitle)
+  // } else if (annotations[`${currentTime}`].type === "timer") {
+  //   document.getElementById("heading").innerHTML = annotations[`${currentTime}`].duration
+  //   vidPlayer[0].setAttribute("contentDisplay", annotations[`${currentTime}`].subtitle)
+  // } else if(annotations[`${currentTime}`].type === "clear") {
+  //   document.getElementById("heading").innerHTML = ""
+  //   vidPlayer[0].setAttribute("contentDisplay", "")
+  // } else if(annotations[`${currentTime}`].type === "duration") {
+  //   document.getElementById("heading").innerHTML = ""
+  // }
+
+  
 
 
 }, 100);
