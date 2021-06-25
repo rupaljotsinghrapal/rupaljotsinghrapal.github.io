@@ -216,17 +216,19 @@ playerManager.setMessageInterceptor(
                 duration: item.value.duration,
                 ends_at: item.ends_at
               }
-              annotations[item.ends_at] = {
-                type: "clear"
-              }
-              let counter = parseInt(item.value.duration)
+              
+              let counter = item.ends_at - item.starts_at;
               while(counter > 0){
                 let time = parseInt(item.starts_at) + 1
                 annotations[`${time}`] = {
                   type: "duration",
-                  title: `${counter}`
+                  title: counter-1
                 }
                 counter--;
+              }
+
+              annotations[item.ends_at] = {
+                type: "clear"
               }
             }
           }
