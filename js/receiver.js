@@ -333,7 +333,7 @@ var intervalRef = setInterval(() => {
     document.getElementById("heading").innerHTML = ""
     vidPlayer[0].setAttribute("contentDisplay", "")
   } else if (annotations[`${currentTime}`].type === "duration") {
-    document.getElementById("heading").innerHTML = title + "s";
+    document.getElementById("heading").innerHTML = annotations[`${currentTime}`].title + "s";
   }
 
 }, 100);
