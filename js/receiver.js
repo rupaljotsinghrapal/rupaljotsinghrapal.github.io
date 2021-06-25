@@ -217,13 +217,18 @@ playerManager.setMessageInterceptor(
                 ends_at: item.ends_at
               }
 
-              for(let i = (item.ends_at - item.starts_at); i > 0; i--){
+              let val = parseInt(item.value.duration) - 1
+
+              while (val > 0) {
                 let obj = {
-                  type : "duration",
-                  title : i
-                };
-                let timeSec = item.ends_at - i;
-                annotations[timeSec] = obj;
+                  type: "duration",
+                  title: val
+                }
+
+
+                let time = item.ends_at - val
+                annotations[`${time}`] = obj
+                val--;
               }
 
               annotations[item.ends_at] = {
@@ -231,7 +236,7 @@ playerManager.setMessageInterceptor(
               }
             }
           }
-          
+
 
         }
 
@@ -318,16 +323,16 @@ var intervalRef = setInterval(() => {
 
   let currentTime = Math.floor(playerManager.getCurrentTimeSec())
 
-  if(annotations[`${currentTime}`].type === "text"){
+  if (annotations[`${currentTime}`].type === "text") {
     document.getElementById("heading").innerHTML = annotations[`${currentTime}`].title
     vidPlayer[0].setAttribute("contentDisplay", annotations[`${currentTime}`].subtitle)
   } else if (annotations[`${currentTime}`].type === "timer") {
     document.getElementById("heading").innerHTML = annotations[`${currentTime}`].duration
     vidPlayer[0].setAttribute("contentDisplay", annotations[`${currentTime}`].subtitle)
-  } else if(annotations[`${currentTime}`].type === "clear") {
+  } else if (annotations[`${currentTime}`].type === "clear") {
     document.getElementById("heading").innerHTML = ""
     vidPlayer[0].setAttribute("contentDisplay", "")
-  } else if(annotations[`${currentTime}`].type === "duration") {
+  } else if (annotations[`${currentTime}`].type === "duration") {
     document.getElementById("heading").innerHTML = title + "s";
   }
 
