@@ -216,16 +216,16 @@ playerManager.setMessageInterceptor(
                 duration: item.value.duration,
                 ends_at: item.ends_at
               }
-              
-              let counter = item.ends_at - item.starts_at;
-              while(counter > 0){
-                let time = parseInt(item.starts_at) + 1
-                annotations[`${time}`] = {
-                  type: "duration",
-                  title: counter-1
-                }
-                counter--;
-              }
+
+              // let counter = item.ends_at - item.starts_at;
+              // while(counter > 0){
+              //   let time = parseInt(item.starts_at) + 1
+              //   annotations[`${time}`] = {
+              //     type: "duration",
+              //     title: counter-1
+              //   }
+              //   counter--;
+              // }
 
               annotations[item.ends_at] = {
                 type: "clear"
@@ -316,15 +316,12 @@ context.start({
 
 var intervalRef = setInterval(() => {
 
-  // let vidPlayer = document.getElementsByTagName("cast-media-player");
-  // let keyArray = Object.keys(customAnnotation);
+  let vidPlayer = document.getElementsByTagName("cast-media-player");
 
-  // let currentTime = Math.floor(playerManager.getCurrentTimeSec())
 
-  // let intervalLessArray = keyArray.filter(val => val < currentTime)
+  let currentTime = Math.floor(playerManager.getCurrentTimeSec())
 
-  // if (intervalLessArray.length >= 0 && currentTime > 0) {
-  //   vidPlayer[0].setAttribute("contentDisplay", customAnnotation[intervalLessArray[intervalLessArray.length - 1]].title)
-  // }
+  vidPlayer[0].setAttribute("contentDisplay", annotations[`${currentTime}`].title)
 
-}, 1000);
+
+}, 100);
