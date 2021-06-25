@@ -172,12 +172,12 @@ playerManager.setMessageInterceptor(
   cast.framework.messages.MessageType.LOAD, loadRequestData => {
     castDebugLogger.error(LOG_RECEIVER_TAG,
       `LOAD interceptor loadRequestData: ${JSON.stringify(loadRequestData)}`);
-    
+
 
     const request = new Request(loadRequestData.media.customData.api_end_point, {
       method: 'GET', headers: {
         'Reachability': loadRequestData.media.customData.headers.Reachability,
-        'Version' : loadRequestData.media.customData.headers.Version,
+        'Version': loadRequestData.media.customData.headers.Version,
         'AppLaunchCount': loadRequestData.media.customData.headers.AppLaunchCount,
         'DeviceHeight': loadRequestData.media.customData.headers.DeviceHeight,
         'IsSubscribed': loadRequestData.media.customData.headers.IsSubscribed,
@@ -194,30 +194,38 @@ playerManager.setMessageInterceptor(
 
     fetch(request)
       .then(response => response.json()).then((res) => {
-        if(res.data){
+        if (res.data) {
           // annotations = res.data.annotations;
 
-          for(let item of res.data.annotations){
-            if(item.type === "text"){
+          for (let item of res.data.annotations) {
+            if (item.type === "text") {
               annotations[item.starts_at] = {
-                title : item.value.title,
-                subtitle : item.value.subtitle,
-                type : item.type
+                title: item.value.title,
+                subtitle: item.value.subtitle,
+                type: item.type,
+                ends_at: item.ends_at
+              };
+              annotations[item.ends_at] = {
+                type: "clear"
               }
-            } else if(item.type === "timer") {
+            } else if (item.type === "timer") {
               annotations[item.starts_at] = {
-                title : item.value.title,
-                subtitle : item.value.subtitle,
-                type : item.type,
-                duration : item.value.duration
+                title: item.value.title,
+                subtitle: item.value.subtitle,
+                type: item.type,
+                duration: item.value.duration,
+                ends_at: item.ends_at
+              }
+              annotations[item.ends_at] = {
+                type: "clear"
               }
             }
           }
 
           document.getElementById("heading").innerHTML = JSON.stringify(annotations)
-          
+
         }
-        
+
       }).catch((error) => {
         document.getElementById("heading").innerHTML = JSON.stringify(error)
       })
@@ -284,18 +292,6 @@ controls.assignButton(
   cast.framework.ui.ControlsButton.QUEUE_NEXT
 );
 
-
-const CUSTOM_CHANNEL = 'urn:x-cast:com.google.cast.media';
-context.addCustomMessageListener(CUSTOM_CHANNEL, function (customEvent) {
-  // handle customEvent.
-  castDebugLogger.error(customEvent);
-  castDebugLogger.warn("Rupal initiated this")
-  castDebugLogger.error(customEvent);
-  castDebugLogger.error(customEvent);
-  castDebugLogger.error(customEvent);
-  castDebugLogger.error(customEvent);
-
-});
 
 
 context.start({
