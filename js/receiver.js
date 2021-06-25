@@ -38,6 +38,7 @@ const playerManager = context.getPlayerManager();
 const LOG_RECEIVER_TAG = 'Receiver';
 
 let customAnnotation = {};
+var annotations = {};
 
 /**
  * Debug Logger
@@ -171,22 +172,7 @@ playerManager.setMessageInterceptor(
   cast.framework.messages.MessageType.LOAD, loadRequestData => {
     castDebugLogger.error(LOG_RECEIVER_TAG,
       `LOAD interceptor loadRequestData: ${JSON.stringify(loadRequestData)}`);
-    document.getElementById("heading").innerHTML = loadRequestData.media.customData.headers.Reachability + loadRequestData.media.customData.headers.Version + loadRequestData.media.customData.headers.AppLaunchCount + loadRequestData.media.customData.headers.DeviceHeight + loadRequestData.media.customData.headers.IsSubscribed + window.navigator.appCodeName + loadRequestData.media.customData.headers.DeviceWidth + loadRequestData.media.customData.headers.TimeZone + loadRequestData.media.customData.headers.Authorization + loadRequestData.media.customData.headers.DeviceID + loadRequestData.media.customData.headers.APIVersion + loadRequestData.media.customData.api_end_point;
-
-    var myHeaders = new Headers();
-    myHeaders.append('Reachability', loadRequestData.media.customData.headers.Reachability);
-    myHeaders.append('Version', loadRequestData.media.customData.headers.Version);
-    myHeaders.append('AppLaunchCount', loadRequestData.media.customData.headers.AppLaunchCount);
-    myHeaders.append('DeviceHeight', loadRequestData.media.customData.headers.DeviceHeight);
-    myHeaders.append('IsSubscribed', loadRequestData.media.customData.headers.IsSubscribed);
-    myHeaders.append('Platform', window.navigator.appCodeName);
-    myHeaders.append('DeviceWidth', loadRequestData.media.customData.headers.DeviceWidth);
-    myHeaders.append('DeviceOS', 'chromecast');
-    myHeaders.append('TimeZone', loadRequestData.media.customData.headers.TimeZone);
-    myHeaders.append('Authorization', loadRequestData.media.customData.headers.Authorization);
-    myHeaders.append('DeviceID', loadRequestData.media.customData.headers.DeviceID);
-    myHeaders.append('APIVersion', loadRequestData.media.customData.headers.APIVersion);
-    // myHeaders.append()
+    
 
     const request = new Request(loadRequestData.media.customData.api_end_point, {
       method: 'GET', headers: {
@@ -207,8 +193,31 @@ playerManager.setMessageInterceptor(
 
 
     fetch(request)
-      .then(response => response.json()).then((data) => {
-        document.getElementById("heading").innerHTML = JSON.stringify(data)
+      .then(response => response.json()).then((res) => {
+        if(res.data){
+          // annotations = res.data.annotations;
+
+          for(let item of res.data.annotations){
+            if(item.type === "text"){
+              annotations[item.starts_at] = {
+                title : item.value.title,
+                subtitle : item.value.subtitle,
+                type : item.type
+              }
+            } else if(item.type === "timer") {
+              annotations[item.starts_at] = {
+                title : item.value.title,
+                subtitle : item.value.subtitle,
+                type : item.type,
+                duration : item.value.duration
+              }
+            }
+          }
+
+          document.getElementById("heading").innerHTML = JSON.stringify(annotations)
+          
+        }
+        
       }).catch((error) => {
         document.getElementById("heading").innerHTML = JSON.stringify(error)
       })
