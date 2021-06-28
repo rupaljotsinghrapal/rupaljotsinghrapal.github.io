@@ -328,12 +328,15 @@ var intervalRef = setInterval(() => {
     document.getElementById("heading").innerHTML = annotations[`${currentTime}`].title
     document.getElementById("sub-heading").innerHTML = annotations[`${currentTime}`].subtitle
   } else if (annotations[`${currentTime}`].type === "timer") {
+    document.getElementById("annotation-container").style.display = 'block';
     document.getElementById("heading").innerHTML = annotations[`${currentTime}`].duration
     document.getElementById("sub-heading").innerHTML = annotations[`${currentTime}`].subtitle
   } else if (annotations[`${currentTime}`].type === "clear") {
+    document.getElementById("annotation-container").style.display = 'none';
     document.getElementById("heading").innerHTML = ""
     document.getElementById("sub-heading").innerHTML = ""
   } else if (annotations[`${currentTime}`].type === "duration") {
+    document.getElementById("annotation-container").style.display = 'block';
     document.getElementById("heading").innerHTML = annotations[`${currentTime}`].title + "s";
   }
 
