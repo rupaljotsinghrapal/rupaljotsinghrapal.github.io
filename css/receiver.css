@@ -22,7 +22,7 @@ cast-media-player {
   --theme-hue: 180;
   --progress-color: rgb(0, 255, 255);
   --splash-image: url('res/logo.png');
-  --splash-size: cover;
+  --splash-size: 50px 50px;
   --slideshow-interval: 8;
   --slideshow-animation: 3;
   --watermark-image : url('res/logo.png');
