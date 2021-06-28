@@ -25,7 +25,8 @@ cast-media-player {
   --splash-size: cover;
   --slideshow-interval: 8;
   --slideshow-animation: 3;
-  
+  --watermark-image : url('res/logo.png');
+  --watermark-repeat : no-repeat;
 }
 
 /* ------------------------------------------------- */
@@ -44,11 +45,11 @@ cast-media-player:after {
   opacity: 1;
   color: red;
 }
-
+/* 
 .watermark {
   background-image: url('res/logo.png');
   background-size: 57px 57px;
-}
+} */
 
 .container {
   position: absolute;
