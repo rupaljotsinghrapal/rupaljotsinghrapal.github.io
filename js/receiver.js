@@ -319,7 +319,7 @@ context.start({
 
 var intervalRef = setInterval(() => {
 
-  let vidPlayer = document.getElementsByTagName("cast-media-player");
+  // let vidPlayer = document.getElementsByTagName("cast-media-player");
 
   let currentTime = Math.floor(playerManager.getCurrentTimeSec())
 

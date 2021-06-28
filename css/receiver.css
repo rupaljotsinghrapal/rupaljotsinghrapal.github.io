@@ -21,7 +21,7 @@ body {
 cast-media-player {
   --theme-hue: 180;
   --progress-color: rgb(0, 255, 255);
-  --splash-image: url('res/background-1.jpg');
+  --splash-image: url('res/logo.jpg');
   --splash-size: cover;
   --slideshow-interval: 8;
   --slideshow-animation: 3;
@@ -57,7 +57,8 @@ cast-media-player:after {
   top:5%;
   left:5%;
   padding:10px;
-  display : block;
+  display : none;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .heading {
