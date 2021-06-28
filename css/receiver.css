@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 body {
-  --playback-logo-image: url('res/logo.png');
+  /* --playback-logo-image: url('res/logo.png'); */
 }
 
 cast-media-player {
@@ -27,6 +27,10 @@ cast-media-player {
   --slideshow-animation: 3;
   --watermark-image : url('res/logo.png');
   --watermark-repeat : no-repeat;
+  --watermark-size : 30px 30px;
+  --logo-image : url('res/logo.png');
+  --logo-size : 30px 30px;
+  --logo-repeat : no-repeat;
 }
 
 /* ------------------------------------------------- */
