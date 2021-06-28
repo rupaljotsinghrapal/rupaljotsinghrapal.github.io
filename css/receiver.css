@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 body {
-  --playback-logo-image: url('res/logo_googleg_color_2x_web_48dp.png');
+  --playback-logo-image: url('res/logo.png');
 }
 
 cast-media-player {
@@ -46,6 +46,29 @@ cast-media-player:after {
 }
 
 .watermark {
-  background-image: url(watermark.png);
+  background-image: url('res/logo.png');
   background-size: 57px 57px;
+}
+
+.container {
+  position: absolute;
+  background-color: rgba(0,0,0,0.4);
+  border-radius: 5px;
+  top:5%;
+  left:5%;
+  padding:10px;
+  display : block;
+}
+
+.heading {
+  color: #fff;
+  font-size: 25px;
+  font-weight:600;
+  font-style:italic
+}
+
+.sub-heading {
+  color: #fff;
+  font-size: 20px;
+  font-weight:500
 }
