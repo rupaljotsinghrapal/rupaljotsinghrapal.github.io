@@ -251,8 +251,8 @@ playerManager.setMessageInterceptor(
 
 
     let metadata = new cast.framework.messages.GenericMediaMetadata();
-    metadata.title = "title";
-    metadata.subtitle = "description";
+    metadata.title = "Ultahuman";
+    // metadata.subtitle = "description";
     // loadRequestData.media.contentId = "https://storage.googleapis.com/cpe-sample-media/content/big_buck_bunny/big_buck_bunny_m4s_master.mpd";
 
     customAnnotation = loadRequestData.media.customData;
@@ -323,19 +323,19 @@ var intervalRef = setInterval(() => {
 
   let currentTime = Math.floor(playerManager.getCurrentTimeSec())
 
-  if (annotations[`${currentTime}`].type === "text") {
+  if (annotations[`${currentTime}`] && annotations[`${currentTime}`].type === "text") {
     document.getElementById("annotation-container").style.display = 'block';
     document.getElementById("heading").innerHTML = annotations[`${currentTime}`].title
     document.getElementById("sub-heading").innerHTML = annotations[`${currentTime}`].subtitle
-  } else if (annotations[`${currentTime}`].type === "timer") {
+  } else if (annotations[`${currentTime}`] && annotations[`${currentTime}`].type === "timer") {
     document.getElementById("annotation-container").style.display = 'block';
     document.getElementById("heading").innerHTML = annotations[`${currentTime}`].duration
     document.getElementById("sub-heading").innerHTML = annotations[`${currentTime}`].subtitle
-  } else if (annotations[`${currentTime}`].type === "clear") {
+  } else if (annotations[`${currentTime}`] && annotations[`${currentTime}`].type === "clear") {
     document.getElementById("annotation-container").style.display = 'none';
     document.getElementById("heading").innerHTML = ""
     document.getElementById("sub-heading").innerHTML = ""
-  } else if (annotations[`${currentTime}`].type === "duration") {
+  } else if (annotations[`${currentTime}`] && annotations[`${currentTime}`].type === "duration") {
     document.getElementById("annotation-container").style.display = 'block';
     document.getElementById("heading").innerHTML = annotations[`${currentTime}`].title + "s";
   }
