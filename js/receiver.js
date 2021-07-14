@@ -218,7 +218,7 @@ playerManager.setMessageInterceptor(
 
                             while (counter > 0) {
                                 annotations[time] = {
-                                    title: counter,
+                                    title: `${counter}s`,
                                     subtitle: item.value.subtitle,
                                     type: item.type,
                                     ends_at: item.ends_at
