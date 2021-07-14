@@ -335,6 +335,10 @@ var intervalRef = setInterval(() => {
         document.getElementById("annotation-container").style.display = 'none';
         document.getElementById("heading").innerHTML = ""
         document.getElementById("sub-heading").innerHTML = ""
+    } else {
+        document.getElementById("annotation-container").style.display = 'none';
+        document.getElementById("heading").innerHTML = ""
+        document.getElementById("sub-heading").innerHTML = ""
     }
 
 }, 300);
