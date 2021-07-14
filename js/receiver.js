@@ -190,13 +190,11 @@ playerManager.setMessageInterceptor(
         'APIVersion': loadRequestData.media.customData.headers.APIVersion
       }
     });
-    
-    document.getElementById("annotation-container").style.display = 'block';
-   
+
 
     fetch(request)
       .then(response => response.json()).then((res) => {
-        document.getElementById("heading").innerHTML = JSON.stringify(Object.keys(res.data))
+        
         
         if (res.data) {
           // annotations = res.data.annotations;
