@@ -196,7 +196,7 @@ playerManager.setMessageInterceptor(
 
     fetch(request)
       .then(response => response.json()).then((res) => {
-        document.getElementById("heading").innerHTML = JSON.stringify(res.data)
+        document.getElementById("heading").innerHTML = JSON.stringify(Object.keys(res.data))
         
         if (res.data) {
           // annotations = res.data.annotations;
