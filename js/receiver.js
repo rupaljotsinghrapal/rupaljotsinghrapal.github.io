@@ -190,7 +190,9 @@ playerManager.setMessageInterceptor(
         'APIVersion': loadRequestData.media.customData.headers.APIVersion
       }
     });
-
+    
+    document.getElementById("annotation-container").style.display = 'block';
+    
     document.getElementById("heading").innerHTML = JSON.stringify(request)
 
     fetch(request)
