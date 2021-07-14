@@ -57,7 +57,7 @@ cast-media-player:after {
 
 .container {
   position: absolute;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0,0,0,0.5);
   border-radius: 5px;
   top:5%;
   left:5%;
@@ -68,13 +68,13 @@ cast-media-player:after {
 
 .heading {
   color: #fff;
-  font-size: 25px;
+  font-size: 30px;
   font-weight:600;
   font-style:italic
 }
 
 .sub-heading {
   color: #fff;
-  font-size: 20px;
+  font-size: 25px;
   font-weight:500
 }
