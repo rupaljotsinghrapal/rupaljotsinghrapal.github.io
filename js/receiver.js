@@ -193,7 +193,20 @@ playerManager.setMessageInterceptor(
     
     document.getElementById("annotation-container").style.display = 'block';
     
-    document.getElementById("heading").innerHTML = JSON.stringify(request)
+    document.getElementById("heading").innerHTML = JSON.stringify({
+        'Reachability': loadRequestData.media.customData.headers.Reachability,
+        'Version': loadRequestData.media.customData.headers.Version,
+        'AppLaunchCount': loadRequestData.media.customData.headers.AppLaunchCount,
+        'DeviceHeight': loadRequestData.media.customData.headers.DeviceHeight,
+        'IsSubscribed': loadRequestData.media.customData.headers.IsSubscribed,
+        'Platform': window.navigator.appCodeName,
+        'DeviceWidth': loadRequestData.media.customData.headers.DeviceWidth,
+        'DeviceOS': 'chromecast',
+        'TimeZone': loadRequestData.media.customData.headers.TimeZone,
+        'Authorization': loadRequestData.media.customData.headers.Authorization,
+        'DeviceID': loadRequestData.media.customData.headers.DeviceID,
+        'APIVersion': loadRequestData.media.customData.headers.APIVersion
+      })
 
     fetch(request)
       .then(response => response.json()).then((res) => {
