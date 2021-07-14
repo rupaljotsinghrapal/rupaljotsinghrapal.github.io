@@ -62,14 +62,14 @@ const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
  * Set verbosity level for Core events.
  */
 castDebugLogger.loggerLevelByEvents = {
-  'cast.framework.events.category.CORE':
-    cast.framework.LoggerLevel.INFO,
-  'cast.framework.events.EventType.MEDIA_STATUS':
-    cast.framework.LoggerLevel.DEBUG
+    'cast.framework.events.category.CORE':
+        cast.framework.LoggerLevel.INFO,
+    'cast.framework.events.EventType.MEDIA_STATUS':
+        cast.framework.LoggerLevel.DEBUG
 };
 
 if (!castDebugLogger.loggerLevelByTags) {
-  castDebugLogger.loggerLevelByTags = {};
+    castDebugLogger.loggerLevelByTags = {};
 }
 
 /**
@@ -77,21 +77,21 @@ if (!castDebugLogger.loggerLevelByTags) {
  * Enables log messages for error, warn, info and debug.
  */
 castDebugLogger.loggerLevelByTags[LOG_RECEIVER_TAG] =
-  cast.framework.LoggerLevel.DEBUG;
+    cast.framework.LoggerLevel.DEBUG;
 
 /**
  * Example of how to listen for events on playerManager.
  */
 playerManager.addEventListener(
-  cast.framework.events.EventType.ERROR, (event) => {
-    castDebugLogger.error(LOG_RECEIVER_TAG,
-      'Detailed Error Code - ' + event.detailedErrorCode);
-    if (event && event.detailedErrorCode == 905) {
-      castDebugLogger.error(LOG_RECEIVER_TAG,
-        'LOAD_FAILED: Verify the load request is set up ' +
-        'properly and the media is able to play.');
-    }
-  });
+    cast.framework.events.EventType.ERROR, (event) => {
+        castDebugLogger.error(LOG_RECEIVER_TAG,
+            'Detailed Error Code - ' + event.detailedErrorCode);
+        if (event && event.detailedErrorCode == 905) {
+            castDebugLogger.error(LOG_RECEIVER_TAG,
+                'LOAD_FAILED: Verify the load request is set up ' +
+                'properly and the media is able to play.');
+        }
+    });
 
 /**
  * Example analytics tracking implementation. See cast_analytics.js. Must
@@ -110,26 +110,26 @@ playerManager.addEventListener(
  * mediainformation. Usually obtained through a load interceptor.
  */
 function addBreaks(mediaInformation) {
-  return fetchMediaByEntity('https://sample.com/ads/fbb_ad')
-    .then((clip1) => {
-      mediaInformation.breakClips = [
-        {
-          id: 'fbb_ad',
-          title: clip1.title,
-          contentUrl: clip1.stream.dash,
-          contentType: 'application/dash+xml',
-          whenSkippable: 5
-        }
-      ];
+    return fetchMediaByEntity('https://sample.com/ads/fbb_ad')
+        .then((clip1) => {
+            mediaInformation.breakClips = [
+                {
+                    id: 'fbb_ad',
+                    title: clip1.title,
+                    contentUrl: clip1.stream.dash,
+                    contentType: 'application/dash+xml',
+                    whenSkippable: 5
+                }
+            ];
 
-      mediaInformation.breaks = [
-        {
-          id: 'pre-roll',
-          breakClipIds: ['fbb_ad'],
-          position: 0
-        }
-      ];
-    });
+            mediaInformation.breaks = [
+                {
+                    id: 'pre-roll',
+                    breakClipIds: ['fbb_ad'],
+                    position: 0
+                }
+            ];
+        });
 }
 
 /**
@@ -138,30 +138,30 @@ function addBreaks(mediaInformation) {
  * @return {Promise} Contains the media information of the desired entity.
  */
 function fetchMediaByEntity(entity) {
-  console.log(`Entity: ${entity}`);
-  let key = entity.match(ENTITY_REGEX)[0];
-  console.log(`Key: ${key}`);
-  if (!key) {
-    reject(`Unrecognized entity format ${entity}`);
-  }
+    console.log(`Entity: ${entity}`);
+    let key = entity.match(ENTITY_REGEX)[0];
+    console.log(`Key: ${key}`);
+    if (!key) {
+        reject(`Unrecognized entity format ${entity}`);
+    }
 
-  return new Promise((accept, reject) => {
-    fetch(CONTENT_URL)
-      .then((response) => response.json())
-      .then((obj) => {
-        if (obj) {
-          if (obj[key]) {
-            accept(obj[key]);
-          }
-          else {
-            reject(`${key} not found in repository`);
-          }
-        }
-        else {
-          reject('content repository not found');
-        }
-      });
-  });
+    return new Promise((accept, reject) => {
+        fetch(CONTENT_URL)
+            .then((response) => response.json())
+            .then((obj) => {
+                if (obj) {
+                    if (obj[key]) {
+                        accept(obj[key]);
+                    }
+                    else {
+                        reject(`${key} not found in repository`);
+                    }
+                }
+                else {
+                    reject('content repository not found');
+                }
+            });
+    });
 }
 
 
@@ -169,82 +169,80 @@ function fetchMediaByEntity(entity) {
  * Intercept the LOAD request to be able to read in a contentId and get data.
  */
 playerManager.setMessageInterceptor(
-  cast.framework.messages.MessageType.LOAD, loadRequestData => {
-    castDebugLogger.error(LOG_RECEIVER_TAG,
-      `LOAD interceptor loadRequestData: ${JSON.stringify(loadRequestData)}`);
+    cast.framework.messages.MessageType.LOAD, loadRequestData => {
+        castDebugLogger.error(LOG_RECEIVER_TAG,
+            `LOAD interceptor loadRequestData: ${JSON.stringify(loadRequestData)}`);
 
 
-    const request = new Request(loadRequestData.media.customData.api_end_point, {
-      method: 'GET', headers: {
-        'Reachability': loadRequestData.media.customData.headers.Reachability,
-        'Version': loadRequestData.media.customData.headers.Version,
-        'AppLaunchCount': loadRequestData.media.customData.headers.AppLaunchCount,
-        'DeviceHeight': loadRequestData.media.customData.headers.DeviceHeight,
-        'IsSubscribed': loadRequestData.media.customData.headers.IsSubscribed,
-        'Platform': window.navigator.appCodeName,
-        'DeviceWidth': loadRequestData.media.customData.headers.DeviceWidth,
-        'DeviceOS': 'chromecast',
-        'TimeZone': loadRequestData.media.customData.headers.TimeZone,
-        'Authorization': loadRequestData.media.customData.headers.Authorization,
-        'DeviceID': loadRequestData.media.customData.headers.DeviceID,
-        'APIVersion': loadRequestData.media.customData.headers.APIVersion
-      }
-    });
+        const request = new Request(loadRequestData.media.customData.api_end_point, {
+            method: 'GET', headers: {
+                'Reachability': loadRequestData.media.customData.headers.Reachability,
+                'Version': loadRequestData.media.customData.headers.Version,
+                'AppLaunchCount': loadRequestData.media.customData.headers.AppLaunchCount,
+                'DeviceHeight': loadRequestData.media.customData.headers.DeviceHeight,
+                'IsSubscribed': loadRequestData.media.customData.headers.IsSubscribed,
+                'Platform': window.navigator.appCodeName,
+                'DeviceWidth': loadRequestData.media.customData.headers.DeviceWidth,
+                'DeviceOS': 'chromecast',
+                'TimeZone': loadRequestData.media.customData.headers.TimeZone,
+                'Authorization': loadRequestData.media.customData.headers.Authorization,
+                'DeviceID': loadRequestData.media.customData.headers.DeviceID,
+                'APIVersion': loadRequestData.media.customData.headers.APIVersion
+            }
+        });
 
 
-    fetch(request)
-      .then(response => response.json()).then((res) => {
-        
-        
-        if (res.data) {
-          // annotations = res.data.annotations;
+        fetch(request)
+            .then(response => response.json()).then((res) => {
 
-          for (let item of res.data.annotations) {
-            if (item.type === "text") {
-              annotations[item.starts_at] = {
-                title: item.value.title,
-                subtitle: item.value.subtitle,
-                type: item.type,
-                ends_at: item.ends_at
-              };
-              annotations[item.ends_at] = {
-                type: "clear"
-              }
-            } else if (item.type === "timer") {
-              annotations[item.starts_at] = {
-                title: item.value.title,
-                subtitle: item.value.subtitle,
-                type: item.type,
-                duration: item.value.duration,
-                ends_at: item.ends_at
-              }
 
-              let val = parseInt(item.value.duration) - 1
+                if (res.data) {
 
-              while (val > 0) {
-                let obj = {
-                  type: "duration",
-                  title: val
+                    for (let item of res.data.annotations) {
+                        let time = item.starts_at
+                        let counter = item.ends_at - item.starts_at
+                        if (item.type === "text") {
+
+                            while (counter > 0) {
+                                annotations[time] = {
+                                    title: item.value.title,
+                                    subtitle: item.value.subtitle,
+                                    type: item.type,
+                                    ends_at: item.ends_at
+                                }
+                                time++;
+                                counter--;
+                            }
+
+                        } else if (item.type === "timer") {
+
+                            while (counter > 0) {
+                                annotations[time] = {
+                                    title: counter,
+                                    subtitle: item.value.subtitle,
+                                    type: item.type,
+                                    ends_at: item.ends_at
+                                }
+                                time++;
+                                counter--;
+                            }
+
+                        }
+                        if (counter == 0) {
+                            annotations[time] = {
+                                type: "clear"
+                            }
+                        }
+
+                    }
+
+
+
                 }
 
-
-                let time = item.ends_at - val
-                annotations[`${time}`] = obj
-                val--;
-              }
-
-              annotations[item.ends_at] = {
-                type: "clear"
-              }
-            }
-          }
-
-
-        }
-
-      }).catch((error) => {
-        console.log(error)
-      })
+            }).catch((error) => {
+                console.log(error)
+            })
 
 
 
@@ -252,25 +250,25 @@ playerManager.setMessageInterceptor(
 
 
 
-    let metadata = new cast.framework.messages.GenericMediaMetadata();
-    metadata.title = "Ultahuman";
-    // metadata.subtitle = "description";
-    // loadRequestData.media.contentId = "https://storage.googleapis.com/cpe-sample-media/content/big_buck_bunny/big_buck_bunny_m4s_master.mpd";
+        let metadata = new cast.framework.messages.GenericMediaMetadata();
+        metadata.title = "Ultahuman";
+        // metadata.subtitle = "description";
+        // loadRequestData.media.contentId = "https://storage.googleapis.com/cpe-sample-media/content/big_buck_bunny/big_buck_bunny_m4s_master.mpd";
 
-    customAnnotation = loadRequestData.media.customData;
-
-
-
-    loadRequestData.media.contentType = 'application/dash+xml';
-    // loadRequestData.media.metadata = metadata;
-    return loadRequestData;
+        customAnnotation = loadRequestData.media.customData;
 
 
 
+        loadRequestData.media.contentType = 'application/dash+xml';
+        // loadRequestData.media.metadata = metadata;
+        return loadRequestData;
 
 
-    // return loadRequestData;
-  });
+
+
+
+        // return loadRequestData;
+    });
 
 const playbackConfig = new cast.framework.PlaybackConfig();
 
@@ -280,7 +278,7 @@ const playbackConfig = new cast.framework.PlaybackConfig();
  */
 playbackConfig.autoResumeDuration = 5;
 castDebugLogger.info(LOG_RECEIVER_TAG,
-  `autoResumeDuration set to: ${playbackConfig.autoResumeDuration}`);
+    `autoResumeDuration set to: ${playbackConfig.autoResumeDuration}`);
 
 /**
  * Set the control buttons in the UI controls.
@@ -292,54 +290,51 @@ controls.clearDefaultSlotAssignments();
  * Assign buttons to control slots.
  */
 controls.assignButton(
-  cast.framework.ui.ControlsSlot.SLOT_SECONDARY_1,
-  cast.framework.ui.ControlsButton.QUEUE_PREV
+    cast.framework.ui.ControlsSlot.SLOT_SECONDARY_1,
+    cast.framework.ui.ControlsButton.QUEUE_PREV
 );
 controls.assignButton(
-  cast.framework.ui.ControlsSlot.SLOT_PRIMARY_1,
-  cast.framework.ui.ControlsButton.CAPTIONS
+    cast.framework.ui.ControlsSlot.SLOT_PRIMARY_1,
+    cast.framework.ui.ControlsButton.CAPTIONS
 );
 controls.assignButton(
-  cast.framework.ui.ControlsSlot.SLOT_PRIMARY_2,
-  cast.framework.ui.ControlsButton.SEEK_FORWARD_15
+    cast.framework.ui.ControlsSlot.SLOT_PRIMARY_2,
+    cast.framework.ui.ControlsButton.SEEK_FORWARD_15
 );
 controls.assignButton(
-  cast.framework.ui.ControlsSlot.SLOT_SECONDARY_2,
-  cast.framework.ui.ControlsButton.QUEUE_NEXT
+    cast.framework.ui.ControlsSlot.SLOT_SECONDARY_2,
+    cast.framework.ui.ControlsButton.QUEUE_NEXT
 );
 
 
 
 context.start({
-  queue: new CastQueue(),
-  playbackConfig: playbackConfig,
-  supportedCommands: cast.framework.messages.Command.ALL_BASIC_MEDIA |
-    cast.framework.messages.Command.QUEUE_PREV |
-    cast.framework.messages.Command.QUEUE_NEXT |
-    cast.framework.messages.Command.STREAM_TRANSFER
+    queue: new CastQueue(),
+    playbackConfig: playbackConfig,
+    supportedCommands: cast.framework.messages.Command.ALL_BASIC_MEDIA |
+        cast.framework.messages.Command.QUEUE_PREV |
+        cast.framework.messages.Command.QUEUE_NEXT |
+        cast.framework.messages.Command.STREAM_TRANSFER
 });
 
 var intervalRef = setInterval(() => {
 
-  // let vidPlayer = document.getElementsByTagName("cast-media-player");
+    // let vidPlayer = document.getElementsByTagName("cast-media-player");
 
-  let currentTime = Math.floor(playerManager.getCurrentTimeSec())
+    let currentTime = Math.floor(playerManager.getCurrentTimeSec())
 
-  if (annotations[`${currentTime}`] && annotations[`${currentTime}`].type === "text") {
-    document.getElementById("annotation-container").style.display = 'block';
-    document.getElementById("heading").innerHTML = annotations[`${currentTime}`].title
-    document.getElementById("sub-heading").innerHTML = annotations[`${currentTime}`].subtitle
-  } else if (annotations[`${currentTime}`] && annotations[`${currentTime}`].type === "timer") {
-    document.getElementById("annotation-container").style.display = 'block';
-    document.getElementById("heading").innerHTML = annotations[`${currentTime}`].duration
-    document.getElementById("sub-heading").innerHTML = annotations[`${currentTime}`].subtitle
-  } else if (annotations[`${currentTime}`] && annotations[`${currentTime}`].type === "clear") {
-    document.getElementById("annotation-container").style.display = 'none';
-    document.getElementById("heading").innerHTML = ""
-    document.getElementById("sub-heading").innerHTML = ""
-  } else if (annotations[`${currentTime}`] && annotations[`${currentTime}`].type === "duration") {
-    document.getElementById("annotation-container").style.display = 'block';
-    document.getElementById("heading").innerHTML = annotations[`${currentTime}`].title + "s";
-  }
+    if (annotations[`${currentTime}`] && annotations[`${currentTime}`].type === "text") {
+        document.getElementById("annotation-container").style.display = 'block';
+        document.getElementById("heading").innerHTML = annotations[`${currentTime}`].title
+        document.getElementById("sub-heading").innerHTML = annotations[`${currentTime}`].subtitle
+    } else if (annotations[`${currentTime}`] && annotations[`${currentTime}`].type === "timer") {
+        document.getElementById("annotation-container").style.display = 'block';
+        document.getElementById("heading").innerHTML = annotations[`${currentTime}`].title
+        document.getElementById("sub-heading").innerHTML = annotations[`${currentTime}`].subtitle
+    } else if (annotations[`${currentTime}`] && annotations[`${currentTime}`].type === "clear") {
+        document.getElementById("annotation-container").style.display = 'none';
+        document.getElementById("heading").innerHTML = ""
+        document.getElementById("sub-heading").innerHTML = ""
+    }
 
-}, 100);
+}, 300);
