@@ -24,7 +24,7 @@ limitations under the License.
 import { CastQueue } from './queuing.js';
 // import { AdsTracker, SenderTracker, ContentTracker } from './cast_analytics.js';
 
-clearInterval(intervalRef);
+// clearInterval(intervalRef);
 /**
  * Constants to be used for fetching media by entity from sample repository.
  */
@@ -317,28 +317,28 @@ context.start({
         cast.framework.messages.Command.STREAM_TRANSFER
 });
 
-var intervalRef = setInterval(() => {
+// var intervalRef = setInterval(() => {
 
-    // let vidPlayer = document.getElementsByTagName("cast-media-player");
+//     // let vidPlayer = document.getElementsByTagName("cast-media-player");
 
-    let currentTime = Math.floor(playerManager.getCurrentTimeSec())
+//     let currentTime = Math.floor(playerManager.getCurrentTimeSec())
 
-    if (annotations[`${currentTime}`] && annotations[`${currentTime}`].type === "text") {
-        document.getElementById("annotation-container").style.display = 'block';
-        document.getElementById("heading").innerHTML = annotations[`${currentTime}`].title
-        document.getElementById("sub-heading").innerHTML = annotations[`${currentTime}`].subtitle
-    } else if (annotations[`${currentTime}`] && annotations[`${currentTime}`].type === "timer") {
-        document.getElementById("annotation-container").style.display = 'block';
-        document.getElementById("heading").innerHTML = annotations[`${currentTime}`].title
-        document.getElementById("sub-heading").innerHTML = annotations[`${currentTime}`].subtitle
-    } else if (annotations[`${currentTime}`] && annotations[`${currentTime}`].type === "clear") {
-        document.getElementById("annotation-container").style.display = 'none';
-        document.getElementById("heading").innerHTML = ""
-        document.getElementById("sub-heading").innerHTML = ""
-    } else {
-        document.getElementById("annotation-container").style.display = 'none';
-        document.getElementById("heading").innerHTML = ""
-        document.getElementById("sub-heading").innerHTML = ""
-    }
+//     if (annotations[`${currentTime}`] && annotations[`${currentTime}`].type === "text") {
+//         document.getElementById("annotation-container").style.display = 'block';
+//         document.getElementById("heading").innerHTML = annotations[`${currentTime}`].title
+//         document.getElementById("sub-heading").innerHTML = annotations[`${currentTime}`].subtitle
+//     } else if (annotations[`${currentTime}`] && annotations[`${currentTime}`].type === "timer") {
+//         document.getElementById("annotation-container").style.display = 'block';
+//         document.getElementById("heading").innerHTML = annotations[`${currentTime}`].title
+//         document.getElementById("sub-heading").innerHTML = annotations[`${currentTime}`].subtitle
+//     } else if (annotations[`${currentTime}`] && annotations[`${currentTime}`].type === "clear") {
+//         document.getElementById("annotation-container").style.display = 'none';
+//         document.getElementById("heading").innerHTML = ""
+//         document.getElementById("sub-heading").innerHTML = ""
+//     } else {
+//         document.getElementById("annotation-container").style.display = 'none';
+//         document.getElementById("heading").innerHTML = ""
+//         document.getElementById("sub-heading").innerHTML = ""
+//     }
 
-}, 300);
+// }, 300);
