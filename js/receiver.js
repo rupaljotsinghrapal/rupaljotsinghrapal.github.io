@@ -21,7 +21,6 @@ limitations under the License.
 
 'use strict';
 
-// import { CastQueue } from './queuing.js';
 // import { AdsTracker, SenderTracker, ContentTracker } from './cast_analytics.js';
 
 clearInterval(intervalRef);
@@ -51,12 +50,12 @@ const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
  * Uncomment below line to enable debug logger and show a 'DEBUG MODE' tag at
  * top left corner.
  */
-castDebugLogger.setEnabled(true);
+// castDebugLogger.setEnabled(true);
 
 /**
  * Uncomment below line to show debug overlay.
  */
-castDebugLogger.showDebugLogs(true);
+// castDebugLogger.showDebugLogs(true);
 
 /**
  * Set verbosity level for Core events.
@@ -276,7 +275,7 @@ const playbackConfig = new cast.framework.PlaybackConfig();
  * Set the player to start playback as soon as there are five seconds of
  * media content buffered. Default is 10.
  */
-playbackConfig.autoResumeDuration = 15;
+playbackConfig.autoResumeDuration = 5;
 castDebugLogger.info(LOG_RECEIVER_TAG,
     `autoResumeDuration set to: ${playbackConfig.autoResumeDuration}`);
 
@@ -309,7 +308,6 @@ controls.assignButton(
 
 
 context.start({
-//     queue: new CastQueue(),
     playbackConfig: playbackConfig,
     supportedCommands: cast.framework.messages.Command.ALL_BASIC_MEDIA |
         cast.framework.messages.Command.QUEUE_PREV |
