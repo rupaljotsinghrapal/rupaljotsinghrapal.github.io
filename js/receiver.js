@@ -21,7 +21,7 @@ limitations under the License.
 
 'use strict';
 
-import { CastQueue } from './queuing.js';
+// import { CastQueue } from './queuing.js';
 // import { AdsTracker, SenderTracker, ContentTracker } from './cast_analytics.js';
 
 clearInterval(intervalRef);
@@ -309,7 +309,7 @@ controls.assignButton(
 
 
 context.start({
-    queue: new CastQueue(),
+//     queue: new CastQueue(),
     playbackConfig: playbackConfig,
     supportedCommands: cast.framework.messages.Command.ALL_BASIC_MEDIA |
         cast.framework.messages.Command.QUEUE_PREV |
